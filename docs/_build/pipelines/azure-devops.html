@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azure DevOps Release Pipeline &mdash; boomi-cicd-cli-py 0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GitHub Actions" href="github-actions.html" />
+    <link rel="prev" title="Release Pipeline Configuration" href="release-pipeline-configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            boomi-cicd-cli-py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example-scripts/example-cicd-scripts.html">Example CICD Scripts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="release-pipeline-configuration.html">Release Pipeline Configuration</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Azure DevOps Release Pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#azure-devops-project-setup">1 Azure DevOps Project Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-azure-devops-project">1.1 Create Azure DevOps Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-the-ci-cd-repo">1.2     Import the CI/CD Repo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-boomi-release-repo">1.3     Create Boomi Release Repo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-the-azure-devops-library">1.4      Configure the Azure DevOps Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#release-pipelines">2       Release Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-release-configuration-file">2.1     Create a Release Configuration File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-the-release-pipeline">2.2     Import the Release Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-approvals-on-production">2.5 Optional: Approvals on Production</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-release-pipeline">2.6     Run the Release Pipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="github-actions.html">GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jenkins.html">Jenkins</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/modules.html">Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">boomi-cicd-cli-py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="release-pipeline-configuration.html">Release Pipeline Configuration</a></li>
+      <li class="breadcrumb-item active">Azure DevOps Release Pipeline</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pipelines/azure-devops.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="azure-devops-release-pipeline">
+<h1>Azure DevOps Release Pipeline<a class="headerlink" href="#azure-devops-release-pipeline" title="Permalink to this heading"></a></h1>
+<section id="azure-devops-project-setup">
+<h2>1 Azure DevOps Project Setup<a class="headerlink" href="#azure-devops-project-setup" title="Permalink to this heading"></a></h2>
+</section>
+<section id="create-azure-devops-project">
+<h2>1.1 Create Azure DevOps Project<a class="headerlink" href="#create-azure-devops-project" title="Permalink to this heading"></a></h2>
+<p>Login to your company’s ADO (Azure DevOps) Organization from the Azure Portal and create a project.
+The project created below is called Boomi CICD Demo, but select a name specific to the project.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/ado-create-project.png"><img alt="../_images/ado-create-project.png" src="../_images/ado-create-project.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 1. Create ADO Project</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>An ADO Project can contain multiple repos. This guide will create 2 repos: boomi-cicd-cli-py and boomi-cicd-release. The boomi-cicd-cli-py repo will contain the Boomi CICD CLI scripts and the boomi-cicd-release repo will contain the release pipeline configuration file. Any name for the repos can be used, but the guide will use the names above.</p>
+</section>
+<section id="import-the-ci-cd-repo">
+<h2>1.2     Import the CI/CD Repo<a class="headerlink" href="#import-the-ci-cd-repo" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Initialize the first repo. To do this, navigate to Repos in the left toolbar and select “Initialize main branch with a README or gitignore” in the bottom middle. Once created, you will be able to create a new repo called boomi-cicd-cli-py.</p></li>
+</ol>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/ado-create-first-repo.png"><img alt="../_images/ado-create-first-repo.png" src="../_images/ado-create-first-repo.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 2. Create boomi-cicd-cli-py Repo</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="2">
+<li><p>Next go to the <a class="reference external" href="https://bitbucket.org/officialboomi/boomi-cicd-cli-py/src/main/">officialboomi Bitbucket boomi-cicd-cli-pi</a> repo. This repo will be cloned to create the ADO repo in the new Project. Copy the URL. This URL will be used in Step 4.</p></li>
+<li><p>Navigate back to the new project. Then select Repos on the left -&gt; Repo dropdown -&gt; Import a repository and do not add README</p></li>
+</ol>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/ado-import-repo.png"><img alt="../_images/ado-import-repo.png" src="../_images/ado-import-repo.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 3. Import Repo Selection</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="4">
+<li><p>Choose Git from drop and set the Clone URL, add the URL from Step 2, and set the name to boomi-cicd-cli-py.</p></li>
+</ol>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../_images/ado-import-git-repo.png"><img alt="../_images/ado-import-git-repo.png" src="../_images/ado-import-git-repo.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 4. Import boomi-cicd-cli-py Repo</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="5">
+<li><p>The repo name will be set to boomi-cicd-cli-py. This value will be used within the <code class="docutils literal notranslate"><span class="pre">BOOMI_CLI_BASE_DIR</span></code> library variable.</p></li>
+</ol>
+</section>
+<section id="create-boomi-release-repo">
+<h2>1.3     Create Boomi Release Repo<a class="headerlink" href="#create-boomi-release-repo" title="Permalink to this heading"></a></h2>
+<p>The release repo will be used to store the release configuration file. All Integration users must have contribution access to this repo.</p>
+<ol class="arabic simple">
+<li><p>Repos -&gt; New Repository -&gt; Repository Name: boomi-cicd-release -&gt; Make sure “Add a README” is checked to initialize the repo -&gt; Click Create</p></li>
+</ol>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="../_images/ado-create-release-repo.png"><img alt="../_images/ado-create-release-repo.png" src="../_images/ado-create-release-repo.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">FIgure 5. Create Release Repo</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="2">
+<li><p>A common directory structure is to create a boomi_release directory and place all release json files within that directory. Additionally, this can allow for the release repo to contain configuration files for other tools.</p></li>
+</ol>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../_images/ado-create-release-repo-structure.png"><img alt="../_images/ado-create-release-repo-structure.png" src="../_images/ado-create-release-repo-structure.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">FIgure 6. Release Release Repo Directory Structure</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="configure-the-azure-devops-library">
+<h2>1.4      Configure the Azure DevOps Library<a class="headerlink" href="#configure-the-azure-devops-library" title="Permalink to this heading"></a></h2>
+<p>Configure ADO project to the Boomi Account. There are additional environment variables that can be configured when using additional scripts (i.e. environment_extensions_update.py and component_xml_code_quality.py) The following are the required environment variables for the release_pipelin.py script.</p>
+<ol class="arabic simple">
+<li><p>Under Pipelines go to Library -&gt; Variable group -&gt; (+) Variable Group</p></li>
+<li><p>Variable group name: boomicicd (this name is used within the pipeline)</p></li>
+<li><p>Description: Account details for Boomi CICD</p></li>
+<li><p>Link secrets if  you choose to use Azure key vault.</p></li>
+<li><p>Click +Add to add variables below. It is recommended to use a Boomi API token with a service account and not username/password. <code class="docutils literal notranslate"><span class="pre">BOOMI_TOKEN.</span></code> is prefixed to the user name and the token can be recieved from <a class="reference external" href="https://help.boomi.com/bundle/atomsphere_platform/page/int-Adding_API_tokens.html">Settings within the Boomi Platform</a>.</p></li>
+<li><p>Click the lock next to BOOMI_PASSWORD to mask the value. The lock will ensure that others will not be able to view the value and will not be able to log the value.</p></li>
+</ol>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../_images/ado-library.png"><img alt="../_images/ado-library.png" src="../_images/ado-library.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 7. Azure DevOps Library</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<table class="docutils align-center" id="id8">
+<caption><span class="caption-text">Table 1. Required Environment Variables</span><a class="headerlink" href="#id8" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Environment Variable</p></th>
+<th class="head"><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>BOOMI_ACCOUNT_ID</p></td>
+<td><p>&lt;boomi-account-id&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>BOOMI_BASE_URL</p></td>
+<td><p><a class="reference external" href="https://api.boomi.com/api/rest/v1">https://api.boomi.com/api/rest/v1</a></p></td>
+</tr>
+<tr class="row-even"><td><p>BOOMI_CLI_BASE_DIR</p></td>
+<td><p>$(System.DefaultWorkingDirectory)/boomi-cicd-cli-py</p></td>
+</tr>
+<tr class="row-odd"><td><p>BOOMI_PASSWORD</p></td>
+<td><p>&lt;boomi-api-token&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>BOOMI_RELEASE_BASE_DIR</p></td>
+<td><p>$(System.DefaultWorkingDirectory)/boomi-cicd-release</p></td>
+</tr>
+<tr class="row-odd"><td><p>BOOMI_USERNAME</p></td>
+<td><p>BOOMI_TOKEN.&lt;username&gt;</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="release-pipelines">
+<h2>2       Release Pipelines<a class="headerlink" href="#release-pipelines" title="Permalink to this heading"></a></h2>
+</section>
+<section id="create-a-release-configuration-file">
+<h2>2.1     Create a Release Configuration File<a class="headerlink" href="#create-a-release-configuration-file" title="Permalink to this heading"></a></h2>
+<p>A Boomi release file is required to trigger a release pipeline to deploy Boomi components. A template of Boomi release file is located within <a class="reference external" href="../getting-started/release.html">boomi_cicd/templates</a>. Use a directory structure from section 1.4 to store configuration files.</p>
+</section>
+<section id="import-the-release-pipeline">
+<h2>2.2     Import the Release Pipeline<a class="headerlink" href="#import-the-release-pipeline" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Click on Pipelines -&gt; Release -&gt; New -&gt; then create a new empty Release Pipeline. It can be deleted later. Azure DevOps requires one Release Pipeline to be created before one can be imported.</p></li>
+<li><p>Click on Pipelines -&gt; Release -&gt; New -&gt; Import Release Pipeline</p></li>
+</ol>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="../_images/ado-import-release-pipeline.png"><img alt="../_images/ado-import-release-pipeline.png" src="../_images/ado-import-release-pipeline.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">FIgure 8. Import Release Pipeline</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="3">
+<li><p>Download the <code class="docutils literal notranslate"><span class="pre">Boomi</span> <span class="pre">General</span> <span class="pre">Release</span> <span class="pre">Pipeline.json</span></code> from  <code class="docutils literal notranslate"><span class="pre">boomi_cicd/templates/azure_devops/</span></code> in the imported repo and
+select the file and click OK.</p></li>
+</ol>
+<figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="../_images/ado-import-release-pipeline-2.png"><img alt="../_images/ado-import-release-pipeline-2.png" src="../_images/ado-import-release-pipeline-2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">FIgure 9. Import Release Pipeline</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="4">
+<li><p>Update the release name to remove the word “Copy”.</p></li>
+</ol>
+<figure class="align-center" id="id11">
+<a class="reference internal image-reference" href="../_images/ado-release-pipeline-name.png"><img alt="../_images/ado-release-pipeline-name.png" src="../_images/ado-release-pipeline-name.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 10. Update Release Pipeline Name</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="5">
+<li><p>Add both Azure Repos made in section 1.2 and 1.3. Click Add an Artifact -&gt; On the slide out select Azure Repo -&gt; then select your first repo -&gt; Fill out the information with the data below. Then do this again for the second repo. Configure artifacts as shown below.</p></li>
+</ol>
+<figure class="align-center" id="id12">
+<a class="reference internal image-reference" href="../_images/ado-release-pipeline-artifacts.png"><img alt="../_images/ado-release-pipeline-artifacts.png" src="../_images/ado-release-pipeline-artifacts.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 11. Add first repo to the release pipeline artifacts</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="../_images/ado-release-pipeline-artifacts-2.png"><img alt="../_images/ado-release-pipeline-artifacts-2.png" src="../_images/ado-release-pipeline-artifacts-2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 12. Release pipeline after both repos have been added</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<table class="docutils align-center" id="id14">
+<caption><span class="caption-text">Table 2. Add repos to the release pipeline</span><a class="headerlink" href="#id14" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Project</p></td>
+<td><p>Boomi DevOps Demo</p></td>
+</tr>
+<tr class="row-odd"><td><p>Source (repository)</p></td>
+<td><p>boomi-cicd-cli-py or boomi-cicd-release</p></td>
+</tr>
+<tr class="row-even"><td><p>Default branch</p></td>
+<td><p>main or master</p></td>
+</tr>
+<tr class="row-odd"><td><p>Default version</p></td>
+<td><p>Latest from the default branch</p></td>
+</tr>
+<tr class="row-even"><td><p>Source alias</p></td>
+<td><p>boomi-cicd-cli-py or boomi-cicd-release (remove the initial underscore)</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple" start="6">
+<li><p>Navigate to the Task drop down. Then configure an agent pipelines for all the Tasks shown in the image below.</p></li>
+</ol>
+<figure class="align-center" id="id15">
+<a class="reference internal image-reference" href="../_images/ado-release-pipeline-agent.png"><img alt="../_images/ado-release-pipeline-agent.png" src="../_images/ado-release-pipeline-agent.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 13. Release pipeline agent configuration</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="7">
+<li><p>Update the environment variable for each Stage to match your company’s Boomi Environment shown in the image below.  Set <code class="docutils literal notranslate"><span class="pre">BOOMI_ATOM_NAME</span></code> and <code class="docutils literal notranslate"><span class="pre">BOOMI_ENVIRONMENT_NAME</span></code> variables per stage. Ensure that the values match the Boomi Environment that you want to deploy to. <code class="docutils literal notranslate"><span class="pre">BOOMI_RELEASE_FILE</span></code> uses <code class="docutils literal notranslate"><span class="pre">conf/release.json</span></code> in the example. conf would be the directory within boomi-cicd-release that contains the release file.</p></li>
+</ol>
+<table class="docutils align-center" id="id16">
+<caption><span class="caption-text">Table 3. Release Pipeline Variables</span><a class="headerlink" href="#id16" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Environment Variable</p></th>
+<th class="head"><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>BOOMI_ATOM_NAME</p></td>
+<td><p>&lt;boomi-atom-name&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>BOOMI_ENVIRONMENT_NAME</p></td>
+<td><p>&lt;boomi-environment-name&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>BOOMI_RELEASE_FILE</p></td>
+<td><p>&lt;boomi-release-file&gt;</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple" start="8">
+<li><p>Update the pre-deployment conditions (triggers, approvals) for each stage as shown below.</p></li>
+<li><p>Clone an existing stage to add a new stage. Click delete to remove stages.</p></li>
+<li><p>Click the variable tab and associate the variable library groups from step 4. Set the variable group scope to Release.</p></li>
+</ol>
+<figure class="align-center" id="id17">
+<a class="reference internal image-reference" href="../_images/ado-release-pipeline-variables.png"><img alt="../_images/ado-release-pipeline-variables.png" src="../_images/ado-release-pipeline-variables.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 14. Release pipeline variables</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="11">
+<li><p>Click save. The release pipeline is now ready to be used.</p></li>
+</ol>
+</section>
+<section id="optional-approvals-on-production">
+<h2>2.5 Optional: Approvals on Production<a class="headerlink" href="#optional-approvals-on-production" title="Permalink to this heading"></a></h2>
+<p>If you want to add approvals on Production stage, you can do so by clicking on the Production stage and then enable Pre-deployment approvals. An approver search box will appear. Search for the approvers group, add it, and then click save.</p>
+<p>Users who can approve must at a minimum have the role of Release Administrator in Azure DevOps. This role will allow
+for them to approve the deployments to production environment, but not allow them to edit the release pipeline.</p>
+<figure class="align-center" id="id18">
+<a class="reference internal image-reference" href="../_images/ado-approval-group.png"><img alt="../_images/ado-approval-group.png" src="../_images/ado-approval-group.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 15. Release Pipeline Pre-deployment Approvals</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="run-the-release-pipeline">
+<h2>2.6     Run the Release Pipeline<a class="headerlink" href="#run-the-release-pipeline" title="Permalink to this heading"></a></h2>
+<p>A new release can be created by going back to Pipeline -&gt; Release Pipeline -&gt; Boomi General Release Pipeline. The click Create release in the top right. The <code class="docutils literal notranslate"><span class="pre">BOOMI_RELEASE_FILE</span></code> is configurable if a different file needs to be used. Once create is clicked, it will automatically  trigger a deployment to Development Stage. Once complete, one can manually deploy to higher environments. Any changes to the configuration file will require a new release to be created and triggered.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="release-pipeline-configuration.html" class="btn btn-neutral float-left" title="Release Pipeline Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="github-actions.html" class="btn btn-neutral float-right" title="GitHub Actions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Boomi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
