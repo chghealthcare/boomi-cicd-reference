@@ -91,7 +91,10 @@ def set_release():
     if args.release:
         return parse_json(args.release)
     else:
-        release_file = boomi_cicd.RELEASE_FILE
+        if boomi_cicd.RELEASE_FILE is not None:
+            release_file = boomi_cicd.RELEASE_FILE
+        else:
+            raise ValueError("No release file specified.")
         return parse_release(release_file)
 
 
@@ -103,8 +106,10 @@ def set_env_release():
 
     :return: The environment extensions release data as a dictionary.
     """
-
-    release_file = boomi_cicd.ENV_RELEASE_FILE
+    if boomi_cicd.ENV_RELEASE_FILE is not None:
+        release_file = boomi_cicd.ENV_RELEASE_FILE
+    else:
+        raise ValueError("No environment extensions release file specified.")
     return parse_release(release_file)
 
 
