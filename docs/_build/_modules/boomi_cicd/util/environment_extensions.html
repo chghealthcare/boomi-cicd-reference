@@ -41,10 +41,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/Getting%20Started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../example_scripts/Example%20CICD%20Scripts.html">Example CICD Scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../pipelines/Release%20Pipeline%20Configuration.html">Release Pipeline Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../modules/Modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../example-scripts/example-cicd-scripts.html">Example CICD Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines/release-pipeline-configuration.html">Release Pipeline Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/modules.html">Modules</a></li>
 </ul>
 
         </div>
@@ -81,7 +81,7 @@
 <span class="c1"># https://help.boomi.com/bundle/developer_apis/page/int-Environment_extensions_object.html</span>
 
 
-<div class="viewcode-block" id="parse_connection_extensions"><a class="viewcode-back" href="../../../modules/environment_extensions.html#boomi_cicd.util.environment_extensions.parse_connection_extensions">[docs]</a><span class="k">def</span> <span class="nf">parse_connection_extensions</span><span class="p">(</span><span class="n">connection_array</span><span class="p">,</span> <span class="n">xml_response</span><span class="p">):</span>
+<div class="viewcode-block" id="parse_connection_extensions"><a class="viewcode-back" href="../../../modules/environment-extensions.html#boomi_cicd.util.environment_extensions.parse_connection_extensions">[docs]</a><span class="k">def</span> <span class="nf">parse_connection_extensions</span><span class="p">(</span><span class="n">connection_array</span><span class="p">,</span> <span class="n">xml_response</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parse the connection extensions from the Component XML response and update the connection array. The connection</span>
 <span class="sd">    array is used when creating a template for environment extensions updates.</span>
@@ -138,7 +138,7 @@
     <span class="k">return</span> <span class="n">connection_array</span></div>
 
 
-<div class="viewcode-block" id="parse_dpp_extensions"><a class="viewcode-back" href="../../../modules/environment_extensions.html#boomi_cicd.util.environment_extensions.parse_dpp_extensions">[docs]</a><span class="k">def</span> <span class="nf">parse_dpp_extensions</span><span class="p">(</span><span class="n">dpp_list</span><span class="p">,</span> <span class="n">xml_response</span><span class="p">):</span>
+<div class="viewcode-block" id="parse_dpp_extensions"><a class="viewcode-back" href="../../../modules/environment-extensions.html#boomi_cicd.util.environment_extensions.parse_dpp_extensions">[docs]</a><span class="k">def</span> <span class="nf">parse_dpp_extensions</span><span class="p">(</span><span class="n">dpp_list</span><span class="p">,</span> <span class="n">xml_response</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parse the DPP (Dynamic Process Property) extensions from the Component XML response and update the DPP list.</span>
 <span class="sd">    The DPP list is used when creating a template for environment extensions updates.</span>
@@ -166,7 +166,7 @@
     <span class="k">return</span> <span class="n">dpp_list</span></div>
 
 
-<div class="viewcode-block" id="parse_pp_extensions"><a class="viewcode-back" href="../../../modules/environment_extensions.html#boomi_cicd.util.environment_extensions.parse_pp_extensions">[docs]</a><span class="k">def</span> <span class="nf">parse_pp_extensions</span><span class="p">(</span><span class="n">pp_dict</span><span class="p">,</span> <span class="n">xml_response</span><span class="p">):</span>
+<div class="viewcode-block" id="parse_pp_extensions"><a class="viewcode-back" href="../../../modules/environment-extensions.html#boomi_cicd.util.environment_extensions.parse_pp_extensions">[docs]</a><span class="k">def</span> <span class="nf">parse_pp_extensions</span><span class="p">(</span><span class="n">pp_dict</span><span class="p">,</span> <span class="n">xml_response</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parse the process property extensions from the XML response and update the Process Property dictionary.</span>
 <span class="sd">    The Process Property dictionary is used when creating a template for environment extensions updates.</span>
@@ -224,7 +224,7 @@
     <span class="k">return</span> <span class="n">pp_dict</span></div>
 
 
-<div class="viewcode-block" id="parse_cross_reference_extensions"><a class="viewcode-back" href="../../../modules/environment_extensions.html#boomi_cicd.util.environment_extensions.parse_cross_reference_extensions">[docs]</a><span class="k">def</span> <span class="nf">parse_cross_reference_extensions</span><span class="p">(</span><span class="n">cross_reference</span><span class="p">,</span> <span class="n">xml_response</span><span class="p">):</span>
+<div class="viewcode-block" id="parse_cross_reference_extensions"><a class="viewcode-back" href="../../../modules/environment-extensions.html#boomi_cicd.util.environment_extensions.parse_cross_reference_extensions">[docs]</a><span class="k">def</span> <span class="nf">parse_cross_reference_extensions</span><span class="p">(</span><span class="n">cross_reference</span><span class="p">,</span> <span class="n">xml_response</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parse the cross-reference extensions from the Component XML response and update the cross-reference list.</span>
 <span class="sd">    The cross-reference list is used when creating a template for environment extensions updates.</span>
@@ -269,7 +269,7 @@
     <span class="k">return</span> <span class="n">cross_reference</span></div>
 
 
-<div class="viewcode-block" id="get_environment_extensions"><a class="viewcode-back" href="../../../modules/environment_extensions.html#boomi_cicd.util.environment_extensions.get_environment_extensions">[docs]</a><span class="k">def</span> <span class="nf">get_environment_extensions</span><span class="p">(</span><span class="n">environment_id</span><span class="p">):</span>
+<div class="viewcode-block" id="get_environment_extensions"><a class="viewcode-back" href="../../../modules/environment-extensions.html#boomi_cicd.util.environment_extensions.get_environment_extensions">[docs]</a><span class="k">def</span> <span class="nf">get_environment_extensions</span><span class="p">(</span><span class="n">environment_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the extensions for the specified environment.</span>
 
@@ -284,7 +284,7 @@
     <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="update_environment_extensions"><a class="viewcode-back" href="../../../modules/environment_extensions.html#boomi_cicd.util.environment_extensions.update_environment_extensions">[docs]</a><span class="k">def</span> <span class="nf">update_environment_extensions</span><span class="p">(</span><span class="n">environment_id</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<div class="viewcode-block" id="update_environment_extensions"><a class="viewcode-back" href="../../../modules/environment-extensions.html#boomi_cicd.util.environment_extensions.update_environment_extensions">[docs]</a><span class="k">def</span> <span class="nf">update_environment_extensions</span><span class="p">(</span><span class="n">environment_id</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
     <span class="n">resource_path</span> <span class="o">=</span> <span class="s2">&quot;/EnvironmentExtensions/</span><span class="si">{}</span><span class="s2">/update}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">environment_id</span><span class="p">)</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">requests_post</span><span class="p">(</span><span class="n">resource_path</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 

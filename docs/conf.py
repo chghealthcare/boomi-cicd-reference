@@ -32,9 +32,9 @@ autosummary_generate = True
 # numfig = True
 # numfig_format = {'figure': 'Figure %s. ', 'table': 'Table %s. ', 'code-block': 'Listing %s. '}
 # numfig_secnum_depth = 0
-# TODO: Figure out why numfig isn't working after figure 11.
+# TODO: Figure out why numfig isn't working after figure 11 in Azure Devops doc
 autodoc_mock_imports = ['requests']
-
+html_favicon = 'favicon.ico'
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 

@@ -29,6 +29,8 @@ Constants can be used within scripts by using boomi_cicd.<constant_name>. An exa
    :annotation:
 .. autodata:: RELEASE_FILE
    :annotation:
+.. autodata:: ENV_RELEASE_FILE
+   :annotation:
 .. autodata:: SONAR_RULES_FILE
    :annotation:
 .. autodata:: CALLS_PER_SECOND

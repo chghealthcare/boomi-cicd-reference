@@ -41,10 +41,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/Getting%20Started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../example_scripts/Example%20CICD%20Scripts.html">Example CICD Scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../pipelines/Release%20Pipeline%20Configuration.html">Release Pipeline Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../modules/Modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../example-scripts/example-cicd-scripts.html">Example CICD Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pipelines/release-pipeline-configuration.html">Release Pipeline Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/modules.html">Modules</a></li>
 </ul>
 
         </div>
@@ -78,7 +78,7 @@
 <span class="c1"># https://help.boomi.com/bundle/developer_apis/page/r-atm-Deployed_Package_object.html</span>
 
 
-<div class="viewcode-block" id="create_deployed_package"><a class="viewcode-back" href="../../../modules/deployed_package.html#boomi_cicd.util.deployed_package.create_deployed_package">[docs]</a><span class="k">def</span> <span class="nf">create_deployed_package</span><span class="p">(</span><span class="n">release</span><span class="p">,</span> <span class="n">package_id</span><span class="p">,</span> <span class="n">environment_id</span><span class="p">):</span>
+<div class="viewcode-block" id="create_deployed_package"><a class="viewcode-back" href="../../../modules/deployed-package.html#boomi_cicd.util.deployed_package.create_deployed_package">[docs]</a><span class="k">def</span> <span class="nf">create_deployed_package</span><span class="p">(</span><span class="n">release</span><span class="p">,</span> <span class="n">package_id</span><span class="p">,</span> <span class="n">environment_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a deployed package in the Boomi environment.</span>
 
@@ -107,7 +107,7 @@
     <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="s2">&quot;deploymentId&quot;</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="query_deployed_package"><a class="viewcode-back" href="../../../modules/deployed_package.html#boomi_cicd.util.deployed_package.query_deployed_package">[docs]</a><span class="k">def</span> <span class="nf">query_deployed_package</span><span class="p">(</span><span class="n">package_id</span><span class="p">,</span> <span class="n">environment_id</span><span class="p">,</span> <span class="n">currently_deployed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="query_deployed_package"><a class="viewcode-back" href="../../../modules/deployed-package.html#boomi_cicd.util.deployed_package.query_deployed_package">[docs]</a><span class="k">def</span> <span class="nf">query_deployed_package</span><span class="p">(</span><span class="n">package_id</span><span class="p">,</span> <span class="n">environment_id</span><span class="p">,</span> <span class="n">currently_deployed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Query the deployed package status in the Boomi environment.</span>
 
@@ -145,7 +145,7 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="delete_deployed_package"><a class="viewcode-back" href="../../../modules/deployed_package.html#boomi_cicd.util.deployed_package.delete_deployed_package">[docs]</a><span class="k">def</span> <span class="nf">delete_deployed_package</span><span class="p">(</span><span class="n">deployment_id</span><span class="p">):</span>
+<div class="viewcode-block" id="delete_deployed_package"><a class="viewcode-back" href="../../../modules/deployed-package.html#boomi_cicd.util.deployed_package.delete_deployed_package">[docs]</a><span class="k">def</span> <span class="nf">delete_deployed_package</span><span class="p">(</span><span class="n">deployment_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Delete a deployed package in the Boomi environment.</span>
 

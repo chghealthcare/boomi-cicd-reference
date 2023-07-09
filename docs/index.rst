@@ -3,24 +3,26 @@ boomi-cicd-cli-py docs
 
 .. note::
 
-   This is a work in progress.  Please check back later for more information.
+   This is a work in progress.  We are continously adding more information.
 
-The boomi-cicd-cli-py library is used to automate Boomi deployments through the CICD Pipelines that your are already using.
-It performs orchestration for deploying and managing Boomi runtimes, components, and metadata required for CI/CD.
-The Release Pipeline Configuration section has the common pipelines that are used
+
+Introduction to boomi-cicd-cli-py
+=================================
+
+The boomi-cicd-cli-py library enables automated Boomi deployments through seamless integration with your existing CI/CD pipelines. It facilitates the orchestration of Boomi runtimes, components, and essential metadata for efficient CI/CD workflows.
+
 
 Project Structure
 =================
 
-The project is broken into three sections.
+The project is organized into three sections:
 
-1. scripts - This directory contains the scripts that will be executed within a CI/CD pipeline.
-   The release_pipeline.py is the main script. There are additional example scripts that can be used as a starting point
-   for your own pipelines.
-2. util - This directory contains the utility scripts that are used by the scripts in the scripts
-   directory.
-3. templates - This directory contains the release pipeline templates. These templates can be
-   used as-is or as a starting point for your own release pipeline.
+1. scripts: This directory contains scripts designed to be executed within your CI/CD pipeline. The main script is release_pipeline.py, and there are additional example scripts available as starting points for your own pipelines.
+2. util: The util directory contains utility scripts used by the scripts in the scripts directory.
+3. templates: The templates directory provides release pipeline templates that can be used as-is or customized for your specific needs.
+
+Documemtation Overview
+======================
 
 Below is a list of the documentation available:
 
@@ -28,10 +30,10 @@ Below is a list of the documentation available:
    :maxdepth: 1
    :caption: Contents:
 
-   getting_started/Getting Started
-   example_scripts/Example CICD Scripts
-   pipelines/Release Pipeline Configuration
-   modules/Modules
+   getting-started/getting-started
+   example-scripts/example-cicd-scripts
+   pipelines/release-pipeline-configuration
+   modules/modules
 
 
 Indices and tables

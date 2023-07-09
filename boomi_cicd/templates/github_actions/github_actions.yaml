@@ -1,0 +1,84 @@
+name: Boomi Release Pipeline
+# Work in progress
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        required: true
+        default: 'development'
+        options:
+          - 'development'
+          - 'stage'
+          - 'production'
+    # Define reviewers for the production environment
+    permissions:
+      reviewers:
+        - <your-github-username>
+
+env:
+  BOOMI_RELEASE_FILE: conf/release.json
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          name: 
+      - name: Use Python 3.11
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ${{ env.BOOMI_CLI_BASE_DIR }}/requirements.txt
+
+      - name: Boomi Release Pipeline
+        run: |
+          export PYTHONPATH=${{ env.BOOMI_CLI_BASE_DIR }}
+          cd ${{ env.BOOMI_CLI_BASE_DIR }}
+          python boomi_cicd/scripts/release_pipeline.py
+
+jobs:
+  development:
+    name: Development
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment == 'development'
+    steps:
+      - name: Build and Deploy
+        uses: ./
+
+  stage:
+    name: Stage
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment == 'stage'
+    steps:
+      - name: Build and Deploy
+        uses: ./
+
+  production:
+    name: Production
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment == 'production'
+    steps:
+      - name: Manual Trigger
+        id: manual
+        run: echo "This workflow was manually triggered."
+
+      - name: Check Manual Trigger
+        run: |
+          if [ -z "${{ steps.manual.outputs.result }}" ]; then
+            echo "Manual trigger not confirmed, exiting workflow."
+            exit 78
+          fi
+
+      - name: Build and Deploy
+        uses: ./

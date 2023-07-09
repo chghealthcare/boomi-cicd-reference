@@ -7,6 +7,7 @@
   <title>boomi-cicd-cli-py docs &mdash; boomi-cicd-cli-py 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -19,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Getting Started" href="getting_started/Getting%20Started.html" /> 
+    <link rel="next" title="Getting Started" href="getting-started/getting-started.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,10 +44,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="getting_started/Getting%20Started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_scripts/Example%20CICD%20Scripts.html">Example CICD Scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipelines/Release%20Pipeline%20Configuration.html">Release Pipeline Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules/Modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-scripts/example-cicd-scripts.html">Example CICD Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines/release-pipeline-configuration.html">Release Pipeline Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/modules.html">Modules</a></li>
 </ul>
 
         </div>
@@ -77,32 +78,32 @@
 <h1>boomi-cicd-cli-py docs<a class="headerlink" href="#boomi-cicd-cli-py-docs" title="Permalink to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This is a work in progress.  Please check back later for more information.</p>
+<p>This is a work in progress.  We are continously adding more information.</p>
 </div>
-<p>The boomi-cicd-cli-py library is used to automate Boomi deployments through the CICD Pipelines that your are already using.
-It performs orchestration for deploying and managing Boomi runtimes, components, and metadata required for CI/CD.
-The Release Pipeline Configuration section has the common pipelines that are used</p>
+</section>
+<section id="introduction-to-boomi-cicd-cli-py">
+<h1>Introduction to boomi-cicd-cli-py<a class="headerlink" href="#introduction-to-boomi-cicd-cli-py" title="Permalink to this heading"></a></h1>
+<p>The boomi-cicd-cli-py library enables automated Boomi deployments through seamless integration with your existing CI/CD pipelines. It facilitates the orchestration of Boomi runtimes, components, and essential metadata for efficient CI/CD workflows.</p>
 </section>
 <section id="project-structure">
 <h1>Project Structure<a class="headerlink" href="#project-structure" title="Permalink to this heading"></a></h1>
-<p>The project is broken into three sections.</p>
+<p>The project is organized into three sections:</p>
 <ol class="arabic simple">
-<li><p>scripts - This directory contains the scripts that will be executed within a CI/CD pipeline.
-The release_pipeline.py is the main script. There are additional example scripts that can be used as a starting point
-for your own pipelines.</p></li>
-<li><p>util - This directory contains the utility scripts that are used by the scripts in the scripts
-directory.</p></li>
-<li><p>templates - This directory contains the release pipeline templates. These templates can be
-used as-is or as a starting point for your own release pipeline.</p></li>
+<li><p>scripts: This directory contains scripts designed to be executed within your CI/CD pipeline. The main script is release_pipeline.py, and there are additional example scripts available as starting points for your own pipelines.</p></li>
+<li><p>util: The util directory contains utility scripts used by the scripts in the scripts directory.</p></li>
+<li><p>templates: The templates directory provides release pipeline templates that can be used as-is or customized for your specific needs.</p></li>
 </ol>
+</section>
+<section id="documemtation-overview">
+<h1>Documemtation Overview<a class="headerlink" href="#documemtation-overview" title="Permalink to this heading"></a></h1>
 <p>Below is a list of the documentation available:</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="getting_started/Getting%20Started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_scripts/Example%20CICD%20Scripts.html">Example CICD Scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipelines/Release%20Pipeline%20Configuration.html">Release Pipeline Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules/Modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-scripts/example-cicd-scripts.html">Example CICD Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines/release-pipeline-configuration.html">Release Pipeline Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/modules.html">Modules</a></li>
 </ul>
 </div>
 </section>
@@ -119,7 +120,7 @@ used as-is or as a starting point for your own release pipeline.</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="getting_started/Getting%20Started.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="getting-started/getting-started.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

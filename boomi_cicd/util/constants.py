@@ -9,7 +9,8 @@ BASE_URL = os.environ.get("BOOMI_BASE_URL")
 ACCOUNT_ID = os.environ.get("BOOMI_ACCOUNT_ID")
 """Account ID for Boomi AtomSphere API."""
 USERNAME = os.environ.get("BOOMI_USERNAME")
-"""Username for Boomi AtomSphere API. If using an API Token (recommended), then BOOMI_TOKEN. will prefix the username."""
+"""Username for Boomi AtomSphere API. If using an API Token (recommended), then BOOMI_TOKEN. will prefix the 
+username."""
 PASSWORD = os.environ.get("BOOMI_PASSWORD")
 """Password for Boomi AtomSphere API. Often it is an API Token."""
 ENVIRONMENT_NAME = os.environ.get("BOOMI_ENVIRONMENT_NAME")
@@ -26,12 +27,16 @@ RELEASE_BASE_DIR = os.environ.get("BOOMI_RELEASE_BASE_DIR", "")
 """Base directory for the release json file."""
 RELEASE_FILE = os.environ.get("BOOMI_RELEASE_FILE")
 """The name of the release json file. RELEASE_FILE is often concatenated with RELEASE_BASE_DIR."""
+ENV_RELEASE_FILE = os.environ.get("BOOMI_ENV_RELEASE_FILE")
+"""The name of the environment extensions release json file. ENV_RELEASE_FILE is often concatenated with 
+RELEASE_BASE_DIR."""
 SONAR_RULES_FILE = os.environ.get(
     "BOOMI_SONAR_RULES_FILE", "boomi_cicd/util/sonarqube/BoomiSonarRules.xml"
 )
-"""Location of the SonarQube rules file. boomi_cicd/util/sonarqube/BoomiSonarRules.xml is the default location within the library."""
+"""Location of the SonarQube rules file. boomi_cicd/util/sonarqube/BoomiSonarRules.xml is the default location within 
+the library."""
 
-# Set AtomSphere API Rate Limit - 10 calls per second
+# Set AtomSphere API Rate Limit -- 10 calls per second
 CALLS_PER_SECOND = os.environ.get("BOOMI_API_CALLS", 10)
 """Number of calls to the Boomi AtomSphere API per second. Default is 10."""
 RATE_LIMIT_SECONDS = 1

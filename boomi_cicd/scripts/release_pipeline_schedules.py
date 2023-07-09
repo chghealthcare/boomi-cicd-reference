@@ -14,13 +14,13 @@ atom_id = query_atom(boomi_cicd.ATOM_NAME)
 
 for release in releases["pipelines"]:
     component_id = release["componentId"]
+    if "schedule" in release:
+        # Get conceptual id of deployed process
+        conceptual_id = query_process_schedules(atom_id, component_id)
 
-    # Get conceptual id of deployed process
-    conceptual_id = query_process_schedules(atom_id, component_id)
-
-    update_process_schedules(
-        component_id,
-        conceptual_id,
-        atom_id,
-        release["schedule"] if "schedule" in release else None,
-    )
+        update_process_schedules(
+            component_id,
+            conceptual_id,
+            atom_id,
+            release["schedule"] if "schedule" in release else None,
+        )

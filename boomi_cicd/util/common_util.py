@@ -95,6 +95,19 @@ def set_release():
         return parse_release(release_file)
 
 
+def set_env_release():
+    """
+    Set the environment extensions release data based on the BOOMI_ENV_RELEASE_FILE environment variable.
+
+    This function retrieves the environment extensions release file.
+
+    :return: The environment extensions release data as a dictionary.
+    """
+
+    release_file = boomi_cicd.ENV_RELEASE_FILE
+    return parse_release(release_file)
+
+
 @sleep_and_retry
 @limits(calls=boomi_cicd.CALLS_PER_SECOND, period=boomi_cicd.RATE_LIMIT_SECONDS)
 def check_limit():
