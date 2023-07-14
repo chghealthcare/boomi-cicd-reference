@@ -4,6 +4,9 @@ Azure DevOps Release Pipeline
 1 Azure DevOps Project Setup
 --------------------------------------------
 
+The Azure DevOps Release Pipeline is configured to promote Boomi packaged components from Development, to Stage, and to Production with an optional approval step before Production.
+
+
 1.1 Create Azure DevOps Project
 --------------------------------------------
 
