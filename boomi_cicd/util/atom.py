@@ -1,5 +1,11 @@
-from boomi_cicd.util.common_util import *
+import json
+import sys
 
+import boomi_cicd
+import logging
+
+
+# from boomi_cicd.util.logging import *
 
 # https://help.boomi.com/bundle/developer_apis/page/r-atm-Atom_object.html
 
@@ -9,7 +15,7 @@ def query_atom(atom_name):
 
     This function sends a request to the AtomSphere API to query for an Atom
     with the specified name. If the Atom is found, then an ID is returned. If no
-    atom is found then an error is logged and the program exits.
+    atom is found, then an error is logged, and the program exits.
 
     :param atom_name: The name of the Atom to query.
     :type atom_name: str
@@ -19,14 +25,15 @@ def query_atom(atom_name):
     resource_path = "/Atom/query"
     environment_query = "boomi_cicd/util/json/atomQuery.json"
 
-    payload = parse_json(environment_query)
+    payload = boomi_cicd.parse_json(environment_query)
     payload["QueryFilter"]["expression"]["argument"][0] = atom_name
 
-    response = requests_post(resource_path, payload)
+    response = boomi_cicd.requests_post(resource_path, payload)
 
     json_response = json.loads(response.text)
+    boomi_cicd.info("hello")
     if json_response["numberOfResults"] == 0:
-        logging.error("Atom not found. atomname: {}".format(boomi_cicd.ATOM_NAME))
+        boomi_cicd.error("Atom not found. atomname: {}".format(boomi_cicd.ATOM_NAME))
         sys.exit(1)
     atom_id = json.loads(response.text)["result"][0]["id"]
     return atom_id

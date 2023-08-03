@@ -1,5 +1,7 @@
-from boomi_cicd.util.common_util import *
+import boomi_cicd
+import json
 
+from boomi_cicd import logger
 
 # https://help.boomi.com/bundle/developer_apis/page/r-atm-Deployed_Package_object.html
 
@@ -19,7 +21,7 @@ def create_deployed_package(release, package_id, environment_id):
     """
     resource_path = "/DeployedPackage"
     environment_query = "boomi_cicd/util/json/deployedPackageCreate.json"
-    payload = parse_json(environment_query)
+    payload = boomi_cicd.parse_json(environment_query)
     payload["environmentId"] = environment_id
     payload["packageId"] = package_id
     payload["notes"] = release["notes"]
@@ -28,7 +30,7 @@ def create_deployed_package(release, package_id, environment_id):
     if "listenerStatus" in release:
         payload["listenerStatus"] = release["listenerStatus"]
 
-    response = requests_post(resource_path, payload)
+    response = boomi_cicd.requests_post(resource_path, payload)
 
     return json.loads(response.text)["deploymentId"]
 
@@ -48,7 +50,7 @@ def query_deployed_package(package_id, environment_id, currently_deployed=True):
     """
     resource_path = "/DeployedPackage/query"
     environment_query = "boomi_cicd/util/json/deployedPackageQuery.json"
-    payload = parse_json(environment_query)
+    payload = boomi_cicd.parse_json(environment_query)
     payload["QueryFilter"]["expression"]["nestedExpression"][0]["argument"][
         0
     ] = environment_id
@@ -61,11 +63,11 @@ def query_deployed_package(package_id, environment_id, currently_deployed=True):
         active_status = {"argument": [True], "operator": "EQUALS", "property": "active"}
         payload["QueryFilter"]["expression"]["nestedExpression"].append(active_status)
 
-    response = requests_post(resource_path, payload)
+    response = boomi_cicd.requests_post(resource_path, payload)
 
     number_of_results = json.loads(response.text)["numberOfResults"]
     if number_of_results:
-        logging.info("Package has already been deployed.")
+        logger.info("Package has already been deployed.")
         return True
     else:
         return False
@@ -82,5 +84,5 @@ def delete_deployed_package(deployment_id):
     """
     resource_path = "/DeployedPackage/{}".format(deployment_id)
 
-    response = requests_delete(resource_path)
+    response = boomi_cicd.requests_delete(resource_path)
     return response.text

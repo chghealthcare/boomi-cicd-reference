@@ -1,12 +1,21 @@
-local
-tests/__pycache__
-tests/.pytest_cache
-.vscode
-.idea
-.pytest_cache
-venv
-.env
-cloned_repo
+# Directories
+docs/_build/
+local/
+venv/
+cloned_repo/
+
+# Files
 profile.html
 profile.json
 
+# Python specific
+tests/__pycache__/
+tests/.pytest_cache/
+.pytest_cache/
+
+# IDE specific
+.vscode/
+.idea/
+
+# Environment specific
+.env

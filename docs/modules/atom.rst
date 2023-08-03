@@ -10,4 +10,3 @@ atom
 .. automodule:: boomi_cicd.util.atom
    :members:
    :undoc-members:
-   :show-inheritance:

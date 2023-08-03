@@ -1,4 +1,5 @@
-from boomi_cicd.util.common_util import *
+import boomi_cicd
+from boomi_cicd import logger
 
 
 def get_package_component_manifest(packaged_component_id):
@@ -12,8 +13,8 @@ def get_package_component_manifest(packaged_component_id):
     :rtype: str
     """
     resource_path = f"/PackagedComponentManifest/{packaged_component_id}"
-    logging.info(resource_path)
+    logger.info(resource_path)
 
-    response = requests_get_xml(resource_path)
+    response = boomi_cicd.requests_get_xml(resource_path)
 
     return response.text

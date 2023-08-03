@@ -1,4 +1,4 @@
-from boomi_cicd.util.common_util import *
+import boomi_cicd
 
 
 def query_component(component_id):
@@ -14,6 +14,6 @@ def query_component(component_id):
     """
     resource_path = "/Component/{}".format(component_id)
 
-    response = requests_get_xml(resource_path)
+    response = boomi_cicd.requests_get_xml(resource_path)
 
     return response.text
