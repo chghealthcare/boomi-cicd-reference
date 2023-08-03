@@ -21,7 +21,7 @@ pipelines:
             - cd docs
             - sphinx-build -b html . _build
           artifacts:
-            - _build/*
+            - docs/_build/**
       - step:
           name: Deploy Documentation to S3
           deployment: production
