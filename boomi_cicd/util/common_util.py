@@ -1,42 +1,13 @@
 import argparse
 import json
-import logging
 import os
-import sys
 
 import requests
 from ratelimit import limits, sleep_and_retry
 from retrying import retry
 
 import boomi_cicd
-
-if os.environ.get("AZURE_HTTP_USER_AGENT") is not None:
-    # Logging conf
-    # Azure DevOps already includes the date/time
-    logging.basicConfig(
-        stream=sys.stdout,
-        format="%(levelname)-5s %(message)s",
-        level=logging.DEBUG,
-    )
-else:
-    logging.basicConfig(
-        stream=sys.stdout,
-        format="%(asctime)s.%(msecs)03d %(levelname)-5s %(message)s",
-        level=logging.DEBUG,
-        datefmt="%Y-%m-%d %H:%M:%S",
-    )
-logger = logging.getLogger()
-
-header = """
-    __                                                __
-   / /_  ____  ____  ____ ___  (_)   _____(_)________/ /
-  / __ \/ __ \/ __ \/ __ `__ \/ /   / ___/ / ___/ __  /
- / /_/ / /_/ / /_/ / / / / / / /   / /__/ / /__/ /_/ /
-/_.___/\____/\____/_/ /_/ /_/_/____\___/_/\___/\__,_/
-                             /_____/                              
-"""
-for line in header.splitlines():
-    logger.info(line)
+from boomi_cicd import logger
 
 
 def parse_json(file_path):
@@ -149,7 +120,7 @@ def requests_get_xml(resource_path):
     response = requests.get(
         url, auth=(boomi_cicd.USERNAME, boomi_cicd.PASSWORD), headers=headers
     )
-    logging.info(
+    logger.info(
         "Response: {}".format(response.text.replace("\r", "").replace("\n", ""))
     )
 
@@ -179,7 +150,7 @@ def requests_get(resource_path):
     response = requests.get(
         url, auth=(boomi_cicd.USERNAME, boomi_cicd.PASSWORD), headers=headers
     )
-    logging.info("Response: {}".format(response.text))
+    logger.info("Response: {}".format(response.text))
     response.raise_for_status()
     return response
 
@@ -202,7 +173,7 @@ def requests_post(resource_path, payload):
     :raises requests.HTTPError: If the POST request fails (non-2xx response). A 503 response will be retried up to 3 times.
     """
     check_limit()
-    logging.info("Request: {}".format(json.dumps(payload)))
+    logger.info("Request: {}".format(json.dumps(payload)))
     headers = {"Accept": "application/json"}
     url = boomi_cicd.BASE_URL + "/" + boomi_cicd.ACCOUNT_ID + resource_path
 
@@ -212,7 +183,7 @@ def requests_post(resource_path, payload):
         json=payload,
         headers=headers,
     )
-    logging.info("Response: {}".format(response.text))
+    logger.info("Response: {}".format(response.text))
     response.raise_for_status()
     return response
 
@@ -239,6 +210,6 @@ def requests_delete(resource_path):
     response = requests.delete(
         url, auth=(boomi_cicd.USERNAME, boomi_cicd.PASSWORD), headers=headers
     )
-    logging.info("Response: {}".format(response.text))
+    logger.info("Response: {}".format(response.text))
     response.raise_for_status()
     return response

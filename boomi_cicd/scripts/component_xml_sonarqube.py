@@ -1,67 +1,50 @@
 import os
 from zipfile import ZipFile
-
+from sys import platform
 import requests
 
 import boomi_cicd
-from boomi_cicd.util.common_util import set_release, logger
+from boomi_cicd import logger
 
-releases = set_release()
 
-base_dir = "cloned_repo"
+# Detect OS
+if platform == "linux" or platform == "linux2":
+    # Download linux zip
+    # https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+    sonarqube_version = "sonar-scanner-cli-5.0.1.3006-linux"
+    sonarqube_version_unzip = "sonar-scanner-5.0.1.3006-linux"
+elif platform == "win32":
+    # Download windows zip
+    # https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-windows.zip
+    sonarqube_version = "sonar-scanner-cli-4.8.0.2856-windows"
+    sonarqube_version_unzip = "sonar-scanner-4.8.0.2856-windows"
+else:
+    raise OSError("Unsupported OS")
 
-# TODO: Detect OS
-# https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-# https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-windows.zip
 # Download SonarQube
 url = "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/"
-sonarqube_version = "sonar-scanner-cli-4.8.0.2856-windows"
 sonarqube_version_zip = f"{sonarqube_version}.zip"
-sonarqube_version_unzip = "sonar-scanner-4.8.0.2856-windows"
 
-# linux= "sonar-scanner-cli-4.8.0.2856-linux.zip"
-r = requests.get(url + sonarqube_version + ".zip", allow_redirects=True)
-with open(f"{boomi_cicd.CLI_BASE_DIR}/{sonarqube_version_zip}", "wb") as f:
+r = requests.get(url + sonarqube_version_zip, allow_redirects=True)
+with open(sonarqube_version_zip, "wb") as f:
     f.write(r.content)
 
 # Extract SonarQube
-with ZipFile(f"{boomi_cicd.CLI_BASE_DIR}/{sonarqube_version_zip}", "r") as zipObj:
-    zipObj.extractall(f"{boomi_cicd.CLI_BASE_DIR}")
-    zipObj.close()
+with ZipFile(sonarqube_version_zip, "r") as zipObj:
+    zipObj.extractall()
 
-sonarProjectKey = "test"
-logger.info(f"sonarProjectKey: {sonarProjectKey}")
-baseFolder = f"C:\\Code\\VSCode\\boomi-cli\\cloned_repo"
-logger.info(f"baseFolder: {baseFolder}")
-sonarHostURL = "http://localhost:9000"
-logger.info(f"sonarHostURL: {sonarHostURL}")
-sonarToken = ""  # "admin"
-logger.info(os.system("cd"))
+
+base_folder = "\"" + os.path.join(os.getcwd(), boomi_cicd.COMPONENT_REPO_NAME) + "\""
+logger.info(f"Boomi Component Repo Directory: {base_folder}")
+logger.info(f"Sonar Host URL: {boomi_cicd.SONARQUBE_HOST_URL}")
+logger.info(f"Sonar Project Key: {boomi_cicd.SONARQUBE_PROJECT_KEY}")
+
 os.system(
     fr"{sonarqube_version_unzip}\bin\sonar-scanner.bat"
-    fr" -Dsonar.projectKey={sonarProjectKey}"
-    fr" -Dsonar.projectBaseDir={baseFolder}"
-    fr" -Dsonar.sources={baseFolder}"
-    fr" -Dsonar.verbose=true"
-    fr" -Dsonar.host.url={sonarHostURL}"
-    # f" -Dsonar.login={sonarToken}"
+    fr" -Dsonar.projectKey={boomi_cicd.SONARQUBE_PROJECT_KEY}"
+    fr" -Dsonar.projectBaseDir={base_folder}"
+    fr" -Dsonar.sources={base_folder}"
+    fr" -Dsonar.host.url={boomi_cicd.SONARQUBE_HOST_URL}"
+    fr" -Dsonar.login={boomi_cicd.SONARQUBE_TOKEN}"
 )
 
-"""
-# Start SonarQube via Command Line
-# https://github.com/OfficialBoomi/boomicicd-cli/blob/master/cli/scripts/bin/sonarScanner.sh
-# https://docs.sonarqube.org/latest/analyzing-source-code/scanners/sonarscanner/
- cd "${SONAR_HOME}"/bin
- ./sonar-scanner \
-  -Dsonar.projectKey="${sonarProjectKey}" \
-  -Dsonar.projectBaseDir="${baseFolder}" \
-  -Dsonar.sources="${baseFolder}" \
-  -Dsonar.host.url="${sonarHostURL}" \
-  -Dsonar.login="${sonarToken}"
-"""
-
-# for release in releases["pipelines"]:
-#     component_id = release["componentId"]
-#     process_name = release["processName"]
-#     package_version = release["packageVersion"]
-#     process_base_dir = f"{base_dir}/{process_name}"

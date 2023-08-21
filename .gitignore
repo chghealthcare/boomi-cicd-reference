@@ -1,12 +1,23 @@
-local
-tests/__pycache__
-tests/.pytest_cache
-.vscode
-.idea
-.pytest_cache
-venv
-.env
-cloned_repo
+# Directories
+boomi_components/
+cloned_repo/
+docs/_build/
+local/
+venv/
+
+# Files
 profile.html
 profile.json
+
+# Python specific
+tests/__pycache__/
+tests/.pytest_cache/
+.pytest_cache/
+
+# IDE specific
+.vscode/
+.idea/
+
+# Environment specific
+.env
 

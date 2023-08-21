@@ -1,7 +1,7 @@
+import boomi_cicd
+import os
+
 from lxml import etree
-
-from boomi_cicd.util.common_util import *
-
 # Set report variables
 REPORT_TITLE = "Packaged Components Code Quality Report"
 REPORT_HEADERS = [
@@ -27,8 +27,7 @@ def print_report_row(row_local):
 
 
 # Open file for report.
-# component_xml_git.py clones the repo to a folder called cloned_repo
-base_folder = "cloned_repo"
+base_folder = boomi_cicd.COMPONENT_REPO_NAME
 f = open(f"{base_folder}/report.md", "w")
 
 sonar_rules = etree.parse(boomi_cicd.SONAR_RULES_FILE)

@@ -8,3 +8,4 @@ Example CICD Scripts
    release-pipeline
    release-pipeline-dr
    environment-extensions-update
+   component-xml-repo

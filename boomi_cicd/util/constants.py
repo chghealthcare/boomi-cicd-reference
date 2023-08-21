@@ -22,19 +22,27 @@ ATOM_NAME_DR = os.environ.get("BOOMI_ATOM_NAME_DR")
 COMPONENT_GIT_URL = os.environ.get("BOOMI_COMPONENT_GIT_URL")
 """Git URL for component. Used when copying component XML to a repository."""
 CLI_BASE_DIR = os.environ.get("BOOMI_CLI_BASE_DIR", "")
-"""Base directory for Boomi CICD CLI scripts."""
+"""Base directory for Boomi CICD CLI scripts. Optional."""
 RELEASE_BASE_DIR = os.environ.get("BOOMI_RELEASE_BASE_DIR", "")
-"""Base directory for the release json file."""
+"""Base directory for the release json file. Optional."""
 RELEASE_FILE = os.environ.get("BOOMI_RELEASE_FILE")
 """The name of the release json file. RELEASE_FILE is often concatenated with RELEASE_BASE_DIR."""
 ENV_RELEASE_FILE = os.environ.get("BOOMI_ENV_RELEASE_FILE")
 """The name of the environment extensions release json file. ENV_RELEASE_FILE is often concatenated with 
 RELEASE_BASE_DIR."""
+COMPONENT_REPO_NAME = os.environ.get("BOOMI_COMPONENT_REPO_NAME", "boomi_components")
+"""The name of the component repository used within the component-xml scripts. boomi_components is the default value. """
 SONAR_RULES_FILE = os.environ.get(
-    "BOOMI_SONAR_RULES_FILE", "boomi_cicd/util/sonarqube/BoomiSonarRules.xml"
+    "BOOMI_SONAR_RULES_FILE", "boomi_cicd/templates/sonarqube/BoomiSonarRules.xml"
 )
 """Location of the SonarQube rules file. boomi_cicd/util/sonarqube/BoomiSonarRules.xml is the default location within 
 the library."""
+SONARQUBE_HOST_URL = os.environ.get("BOOMI_SONARQUBE_HOST_URL", "")
+"""URL for SonarQube."""
+SONARQUBE_PROJECT_KEY = os.environ.get("BOOMI_SONARQUBE_PROJECT_KEY", "")
+"""Project Key for SonarQube."""
+SONARQUBE_TOKEN = os.environ.get("BOOMI_SONARQUBE_TOKEN", "")
+"""Token for SonarQube."""
 
 # Set AtomSphere API Rate Limit -- 10 calls per second
 CALLS_PER_SECOND = os.environ.get("BOOMI_API_CALLS", 10)

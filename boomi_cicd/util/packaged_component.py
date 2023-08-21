@@ -1,4 +1,7 @@
-from boomi_cicd.util.common_util import *
+import boomi_cicd
+import json
+
+from boomi_cicd import logger
 
 
 # https://help.boomi.com/bundle/developer_apis/page/r-atm-Packaged_Component_object.html
@@ -18,15 +21,15 @@ def create_packaged_component(component_id, package_version, notes):
     :rtype: str
     """
     resource_path = "/PackagedComponent"
-    logging.info(resource_path)
+    logger.info(resource_path)
     packaged_component_query = "boomi_cicd/util/json/createPackagedComponent.json"
 
-    payload = parse_json(packaged_component_query)
+    payload = boomi_cicd.parse_json(packaged_component_query)
     payload["componentId"] = component_id
     payload["packageVersion"] = package_version
     payload["notes"] = notes
 
-    response = requests_post(resource_path, payload)
+    response = boomi_cicd.requests_post(resource_path, payload)
 
     package_id = json.loads(response.text)["packageId"]
     return package_id
@@ -44,12 +47,12 @@ def query_packaged_component(component_id, package_version):
     :rtype: str
     """
     resource_path = "/PackagedComponent/query"
-    logging.info(resource_path)
-    logging.info(f"ComponentId: {component_id}")
-    logging.info(f"PackagedVersion: {package_version}")
+    logger.info(resource_path)
+    logger.info(f"ComponentId: {component_id}")
+    logger.info(f"PackagedVersion: {package_version}")
     packaged_component_query = "boomi_cicd/util/json/packagedComponentQuery.json"
 
-    payload = parse_json(packaged_component_query)
+    payload = boomi_cicd.parse_json(packaged_component_query)
     payload["QueryFilter"]["expression"]["nestedExpression"][0]["argument"][
         0
     ] = component_id
@@ -57,11 +60,11 @@ def query_packaged_component(component_id, package_version):
         0
     ] = package_version
 
-    response = requests_post(resource_path, payload)
+    response = boomi_cicd.requests_post(resource_path, payload)
 
     package_id = ""
     if json.loads(response.text)["numberOfResults"] > 0:
-        logging.info(
+        logger.info(
             f"Packaged component has already been created. ComponentId: {component_id}, PackageId: {package_version}"
         )
         package_id = json.loads(response.text)["result"][0]["packageId"]

@@ -1,8 +1,6 @@
+import boomi_cicd
+import json
 import xml.etree.ElementTree as ET
-
-from boomi_cicd.util.common_util import *
-from boomi_cicd.util.component import query_component
-
 
 # https://help.boomi.com/bundle/developer_apis/page/int-Environment_extensions_object.html
 
@@ -23,8 +21,8 @@ def parse_connection_extensions(connection_array, xml_response):
     existing_connection_id = {conn["id"] for conn in connection_array}
 
     for connection_override in root.findall(
-            ".//bns:processOverrides/Overrides/Connections/ConnectionOverride",
-            boomi_cicd.NAMESPACES,
+        ".//bns:processOverrides/Overrides/Connections/ConnectionOverride",
+        boomi_cicd.NAMESPACES,
     ):
         if connection_override.attrib["id"] not in existing_connection_id:
             new_connection = {
@@ -79,8 +77,8 @@ def parse_dpp_extensions(dpp_list, xml_response):
     root = ET.fromstring(xml_response)
 
     for prop_override in root.findall(
-            ".//bns:processOverrides/Overrides/Properties/PropertyOverride",
-            boomi_cicd.NAMESPACES,
+        ".//bns:processOverrides/Overrides/Properties/PropertyOverride",
+        boomi_cicd.NAMESPACES,
     ):
         existing_dpp = next(
             (dpp for dpp in dpp_list if dpp == prop_override.attrib["name"]), None
@@ -106,8 +104,8 @@ def parse_pp_extensions(pp_dict, xml_response):
     """
     root = ET.fromstring(xml_response)
     for process_prop_override in root.findall(
-            ".//bns:processOverrides/Overrides/DefinedProcessPropertyOverrides/OverrideableDefinedProcessPropertyComponent",
-            boomi_cicd.NAMESPACES,
+        ".//bns:processOverrides/Overrides/DefinedProcessPropertyOverrides/OverrideableDefinedProcessPropertyComponent",
+        boomi_cicd.NAMESPACES,
     ):
         existing_pp_ids = {pp["id"] for pp in pp_dict}
         if process_prop_override.attrib["componentId"] not in existing_pp_ids:
@@ -125,7 +123,7 @@ def parse_pp_extensions(pp_dict, xml_response):
             if pp["id"] == process_prop_override.attrib["componentId"]:
                 pp_values = pp["ProcessPropertyValue"]
                 for overide_pp_vaule in process_prop_override.findall(
-                        "./OverrideableDefinedProcessPropertyValue"
+                    "./OverrideableDefinedProcessPropertyValue"
                 ):
                     if overide_pp_vaule.attrib["overrideable"] == "true":
                         existing_pp_value = next(
@@ -165,8 +163,8 @@ def parse_cross_reference_extensions(cross_reference, xml_response):
     root = ET.fromstring(xml_response)
     cr_ids = {cr["id"] for cr in cross_reference}
     for cross_reference_override in root.findall(
-            ".//bns:processOverrides/Overrides/CrossReferenceOverrides/CrossReferenceOverride",
-            boomi_cicd.NAMESPACES,
+        ".//bns:processOverrides/Overrides/CrossReferenceOverrides/CrossReferenceOverride",
+        boomi_cicd.NAMESPACES,
     ):
         if cross_reference_override.attrib["id"] not in cr_ids:
             new_cross_reference = {
@@ -177,10 +175,12 @@ def parse_cross_reference_extensions(cross_reference, xml_response):
                 "name": cross_reference_override.attrib["name"],
             }
 
-            cross_reference_xml = query_component(cross_reference_override.attrib["id"])
+            cross_reference_xml = boomi_cicd.query_component(
+                cross_reference_override.attrib["id"]
+            )
             cross_reference_root = ET.fromstring(cross_reference_xml)
             for cross_reference_rows in cross_reference_root.findall(
-                    ".//bns:object/CrossRefTable/Rows/row", boomi_cicd.NAMESPACES
+                ".//bns:object/CrossRefTable/Rows/row", boomi_cicd.NAMESPACES
             ):
                 new_row = {"@type": "CrossReferenceRow"}
                 for cross_reference_col in cross_reference_rows.findall(".//ref"):
@@ -205,13 +205,13 @@ def get_environment_extensions(environment_id):
     :rtype: dict
     """
     resource_path = "/EnvironmentExtensions/{}".format(environment_id)
-    response = requests_get(resource_path)
+    response = boomi_cicd.requests_get(resource_path)
 
     return json.loads(response.text)
 
 
 def update_environment_extensions(environment_id, payload):
     resource_path = "/EnvironmentExtensions/{}/update}".format(environment_id)
-    response = requests_post(resource_path, payload)
+    response = boomi_cicd.requests_post(resource_path, payload)
 
     return json.loads(response.text)

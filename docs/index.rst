@@ -1,11 +1,3 @@
-boomi-cicd-cli-py docs
-======================================
-
-.. note::
-
-   This is a work in progress.  We are continously adding more information.
-
-
 Introduction to boomi-cicd-cli-py
 =================================
 
