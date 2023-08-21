@@ -1,6 +1,6 @@
 .. _environment_extensions_update:
 
-environment_extensions_update
+Environment Extensions Update
 =============================
 
 The environment_extensions_update script is used to update the environment extensions for a given environment. The script is intended to run after the `release_pipeline script <release_pipeline.html>`_ has been ran.
@@ -17,35 +17,25 @@ The environment_extensions_update script is used to update the environment exten
 Required Environment Variables
 ------------------------------
 
-+-----------------------+-----------------------------------------------------------------------------+
-| Environment Variable  | Description                                                                 |
-+=======================+=============================================================================+
-| BOOMI_ACCOUNT_ID      | The Boomi account ID.                                                       |
-+-----------------------+-----------------------------------------------------------------------------+
-| BOOMI_ATOM_NAME       | The name of the Boomi Atom.                                                 |
-+-----------------------+-----------------------------------------------------------------------------+
-| BOOMI_ATOM_NAME_DR    | The name of the Boomi Atom.                                                 |
-+-----------------------+-----------------------------------------------------------------------------+
-| BOOMI_BASE_URL        | The base URL for the Boomi API. https://api.boomi.com/api/rest/v1           |
-+-----------------------+-----------------------------------------------------------------------------+
-| BOOMI_CLI_BASE_DIR    | The base directory for the Boomi CLI.                                       |
-+-----------------------+-----------------------------------------------------------------------------+
-| BOOMI_PASSWORD        | The Boomi password. Atomsphere API Token is recommended                     |
-+-----------------------+-----------------------------------------------------------------------------+
-| BOOMI_RELEASE_BASE_DIR| The base directory for the release JSON file.                               |
-+-----------------------+-----------------------------------------------------------------------------+
-| BOOMI_RELEASE_FILE    | The name of the release JSON file to use. The release file contains         |
-|                       | the environment extensions to be updated.                                   |
-+-----------------------+-----------------------------------------------------------------------------+
-| BOOMI_USERNAME        | The Boomi username. Atomsphere API Token is recommended                     |
-+-----------------------+-----------------------------------------------------------------------------+
++---------------------------+-----------------------------------------------------------------------------+
+| Environment Variable      | Description                                                                 |
++===========================+=============================================================================+
+| BOOMI_ACCOUNT_ID          | The Boomi account ID.                                                       |
++---------------------------+-----------------------------------------------------------------------------+
+| BOOMI_ATOM_NAME           | The name of the Boomi Atom.                                                 |
++---------------------------+-----------------------------------------------------------------------------+
+| BOOMI_ATOM_NAME_DR        | The name of the Boomi Atom.                                                 |
++---------------------------+-----------------------------------------------------------------------------+
+| BOOMI_BASE_URL            | The base URL for the Boomi API. https://api.boomi.com/api/rest/v1           |
++---------------------------+-----------------------------------------------------------------------------+
+| BOOMI_PASSWORD            | The Boomi password. Atomsphere API Token is recommended                     |
++---------------------------+-----------------------------------------------------------------------------+
+| BOOMI_ENV_RELEASE_FILE    | The location of the release JSON file to use. The release file contains     |
+|                           | the environment extensions to be updated.                                   |
++---------------------------+-----------------------------------------------------------------------------+
+| BOOMI_USERNAME            | The Boomi username. Atomsphere API Token is recommended                     |
++---------------------------+-----------------------------------------------------------------------------+
 
-
-Command Line Arguments
-----------------------
-
-* -r, --release_file: The release JSON file to use. If not specified, then the BOOMI_RELEASE_FILE environment variable
-  will be used.
 
 Release JSON File
 -----------------

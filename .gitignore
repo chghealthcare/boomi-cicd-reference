@@ -1,8 +1,9 @@
 # Directories
+boomi_components/
+cloned_repo/
 docs/_build/
 local/
 venv/
-cloned_repo/
 
 # Files
 profile.html
@@ -19,3 +20,4 @@ tests/.pytest_cache/
 
 # Environment specific
 .env
+

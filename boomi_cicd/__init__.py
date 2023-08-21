@@ -4,7 +4,7 @@ from .util.atom import *
 from .util.change_listener_status import *
 from .util.common_util import *
 from .util.component import *
-
+from .util.component_xml import *
 from .util.deployed_package import *
 from .util.environment import *
 from .util.environment_extensions import *

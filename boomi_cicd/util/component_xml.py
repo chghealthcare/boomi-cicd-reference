@@ -1,7 +1,7 @@
 import os
 
 
-def get_file_refs(location):
+def get_component_xml_file_refs(location):
     """
     Read .componentRef file to get component id of folder/files.
 
@@ -25,7 +25,7 @@ def get_file_refs(location):
     return file_refs
 
 
-def set_file_refs(location, file_refs):
+def set_component_xml_file_refs(location, file_refs):
     """
     Write .componentRef file to set component id of folder/files.
 

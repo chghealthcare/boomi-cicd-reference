@@ -1,5 +1,5 @@
 release json
-===================
+============
 
 .. literalinclude:: ../../boomi_cicd/templates/release.json
    :language: json
@@ -46,7 +46,7 @@ The ``schedule`` element requires six space-delimited values in the following or
    +-------------+-----------------------------------------------------------------------------------------------------------------------+
    | daysOfMonth | 1 is the first day of the month and 31 is the last day of the month.                                                  |
    +-------------+-----------------------------------------------------------------------------------------------------------------------+
-   | month       | 1 is January and 12 is December. In most cases this is set to an asterisk [*].                                        |
+   | month       | 1 is January and 12 is December. Often set to an asterisk [*].                                                        |
    +-------------+-----------------------------------------------------------------------------------------------------------------------+
-   | year        | 4 digit year - for example, 2023.                                                                                     |
+   | year        | 4 digit year - for example, 2023. Often set to an asterisk [*].                                                       |
    +-------------+-----------------------------------------------------------------------------------------------------------------------+
