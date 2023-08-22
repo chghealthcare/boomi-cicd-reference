@@ -9,9 +9,16 @@ Project Structure
 
 The project is organized into three sections:
 
-1. scripts: This directory contains scripts designed to be executed within your CI/CD pipeline. The main script is release_pipeline.py, and there are additional example scripts available as starting points for your own pipelines.
-2. util: The util directory contains utility scripts used by the scripts in the scripts directory.
-3. templates: The templates directory provides release pipeline templates that can be used as-is or customized for your specific needs.
+1. scripts: Contains scripts designed to be executed within your CI/CD pipeline. The main script is release_pipeline.py, and there are additional example scripts available as starting points for your own pipelines.
+2. util: Contains the core functionality of the library.
+3. templates: Contains release pipeline templates that can be used as-is or customized for your specific requirements.
+
+
+Pre-requisites
+==============
+* Python 3
+* Additional libraries, which can be installed with ``pip install -r requirements.txt``
+
 
 Documemtation Overview
 ======================

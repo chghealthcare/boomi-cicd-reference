@@ -1,4 +1,4 @@
-# Boomi CI/CD Reference Implementation
+# Introduction to boomi-cicd-cli-py
 
 The boomi-cicd-cli-py library enables automated Boomi deployments through seamless integration with your existing CI/CD pipelines. It facilitates the orchestration of Boomi runtimes, components, and essential metadata for efficient CI/CD workflows.
 
@@ -10,7 +10,8 @@ To get started, there are two main elements you need to complete: importing this
 
 ## Documentation
 
-The documentation for this project is hosted on [boomi-cicd-cli-py Documentation](https://boomi-cicd-cli-py.s3.amazonaws.com/index.html). 
+The documentation for this project is found at [boomi-cicd-cli-py Documentation](https://boomi-cicd-cli-py.s3.amazonaws.com/index.html).
+It includes all the information you need to get started with the library, including installation instructions, usage examples, and release pipeline templates.
 
 
 ## Pre-requistes
@@ -21,28 +22,27 @@ The documentation for this project is hosted on [boomi-cicd-cli-py Documentation
 
 ## Project Structure
 
-The project is broken into three sections.
+The project is organized into three sections:
 
 1. [scripts](boomi_cicd/scripts) - Contains the scripts to be executed within a CI/CD pipeline. The main script is `release_pipeline.py`, and there are additional example scripts that can serve as starting points for your own pipelines.
-2. [util](boomi_cicd/util) - Contains utility scripts used by the scripts in the `scripts` directory.
+2. [util](boomi_cicd/util) - Contains the core functionality of the library.
 3. [templates](boomi_cicd/templates) - Contains release pipeline templates that can be used as-is or customized for your specific requirements.
 
 
-## Example Scripts
+## Running Your First Pipeline
 
-| Name                             | Description                                                     |
-|----------------------------------|-----------------------------------------------------------------|
-| release_pipeline                 | Create packaged components and deploy to an environment         |
-| release_pipeline_dr              | 	Configures schedules and listeners for disaster recovery site  |
-| release_pipeline_schedules       | Update schedules on an atom                                     |
-| environment_extensions_update    | Update environment extensions                                   |
-| environment_extensions_templates | Create environment extensions from templates                    |
-| component_xml_git                | Copy component XML files into a git repository                  |
+We will start with running `release_pipeline.py`.
+The pipeline is designed
+to check if a package component should be created, and if a process needs to be deployed to a specific environment. 
+
+1. Create a Release JSON
+2. Set Environment Variables
+3. Run the Release Pipeline script
 
 
-## Release JSON File
+### Release JSON File
 
-The mentioned scripts rely on the `release.json` file, which includes the components to be deployed and their configuration.
+The Release Pipeline script rely on the `release.json` file, which includes the components to be deployed and their configuration.
 
 | Release JSON Element | Description                                                                                                                                                             | Required |
 |----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
@@ -83,51 +83,30 @@ An example release JSON file with a batch process, a listener process, and a cus
 ```
 
 
-## Environment Variables
+### Environment Variables
 
 The following environment variables are required to run the releasePipeline.py script. They can be set by environment
-variables or by using a .env file. Not variables are 
+variables or by using a .env file. 
 
-| Environment Variable    | boomi_cicd Constant Name | Description                                       | Required                                                                       |  
-|-------------------------|--------------------------|---------------------------------------------------|--------------------------------------------------------------------------------|
-| BOOMI_BASE_URL          | BASE_URL                 | The base URL of the Boomi account                 | Yes                                                                            |
-| BOOMI_ACCOUNT_ID        | ACCOUNT_ID               | The account ID of the Boomi account               | Yes                                                                            |
-| BOOMI_USERNAME          | USERNAME                 | The username of the Boomi account                 | Yes                                                                            |
-| BOOMI_PASSWORD          | PASSWORD                 | The password of the Boomi account                 | Yes                                                                            |
-| BOOMI_ENVIRONMENT_NAME  | ENVIRONMENT_NAME         | The environment name used to deploy to components | Yes                                                                            |
-| BOOMI_ATOM_NAME         | ATOM_NAME                | The atom name used to set set schedules           | Yes                                                                            |
-| BOOMI_ATOM_NAME_DR      | ATOM_NAME_DR             | The atom name of the disaster recovery atom       | Optional ([release_pipeline_dr.py](boomi_cicd/scripts/release_pipeline_dr.py)) |
-| BOOMI_COMPONENT_GIT_URL | COMPONENT_GIT_URL        | git URL of the component repository               | Optional ([component_xml_git.py](boomi_cicd/scripts/component_xml_git.py))     |
-| BOOMI_CLI_BASE_DIR      | CLI_BASE_DIR             | Base directory of the boomi_cicd scripts          | Yes                                                                            |
-| BOOMI_CLI_RELEASE_DIR   | CLI_RELEASE_DIR          | Base directory of the release.json file           | Yes                                                                            |
-| BOOMI_CLI_RELEASE_FILE  | CLI_RELEASE_FILE         | Name of the release.json file                     | Yes                                                                            |
+| Environment Variable   | boomi_cicd Constant Name | Description                                       | Required   |  
+|------------------------|----------------------|---------------------------------------------------|------------|
+| BOOMI_BASE_URL         | BASE_URL             | The base URL of the Boomi account                 | Yes        |
+| BOOMI_ACCOUNT_ID       | ACCOUNT_ID           | The account ID of the Boomi account               | Yes        |
+| BOOMI_USERNAME         | USERNAME             | The username of the Boomi account                 | Yes        |
+| BOOMI_PASSWORD         | PASSWORD             | The password of the Boomi account                 | Yes        |
+| BOOMI_ENVIRONMENT_NAME | ENVIRONMENT_NAME     | The environment name used to deploy to components | Yes        |
+| BOOMI_RELEASE_FILE     | RELEASE_FILE         | Full path of the release.json file                | Yes        |
 
-The environment variables can be accessed within the scripts by importing boomi_cicd and using the variable name. The
-constant names are the same as above but with 'BOOMI_' removed.
 
-```python
-import boomi_cicd
+### Running the Release Pipeline
 
-# Read the base URL
-print(boomi_cicd.BASE_URL)
-```
+Once you have created the release JSON file and set the environment variables,
+you can execute the release pipeline script. To define a release file, you can either use a command-line argument (-r) or set the file using an environment variable
+(BOOMI_RELEASE_FILE).
 
-## Running the Release Pipeline
-
-Once you have created the release JSON file and set the environment variables, you can execute the release pipeline script.
-
-To define a release file, you can either use a command-line argument (-r) or set the file using an environment variable (BOOMI_CLI_RELEASE_FILE).
-
-Example of setting a release file using an environment variable:
-
+Example of running the release pipeline script:
 ```bash
 python boomi_cicd/scripts/releasePipeline.py
-```
-
-Alternatively, you can set the release file with a command-line argument:
-
-```bash
-python boomi_cicd/scripts/releasePipeline.py -r <release-file-location>
 ```
 
 
@@ -137,14 +116,7 @@ A variety of release templates are at your disposal, each accompanied by compreh
 
 * [Azure DevOps](https://boomi-cicd-cli-py.s3.amazonaws.com/pipelines/azure-devops.html)
 * [GitHub Actions](https://boomi-cicd-cli-py.s3.amazonaws.com/pipelines/github-actions.html): TODO
-* [Jenkins](https://boomi-cicd-cli-py.s3.amazonaws.com/pipelines/jenkins.html): TODO
-
-
-## TODOs
-
-* Script for SonarQube integration.
-* Script for GitHub Actions integration.
-* Script for Jenkins integration.
+* [Jenkins](https://boomi-cicd-cli-py.s3.amazonaws.com/pipelines/jenkins.html)
 
 
 ## Documentation Build
