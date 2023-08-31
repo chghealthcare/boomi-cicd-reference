@@ -1,5 +1,4 @@
 import boomi_cicd
-import json
 
 from boomi_cicd import logger
 
@@ -32,7 +31,7 @@ def create_deployed_package(release, package_id, environment_id):
 
     response = boomi_cicd.requests_post(resource_path, payload)
 
-    return json.loads(response.text)["deploymentId"]
+    return response["deploymentId"]
 
 
 def query_deployed_package(package_id, environment_id, currently_deployed=True):
@@ -65,7 +64,7 @@ def query_deployed_package(package_id, environment_id, currently_deployed=True):
 
     response = boomi_cicd.requests_post(resource_path, payload)
 
-    number_of_results = json.loads(response.text)["numberOfResults"]
+    number_of_results = response["numberOfResults"]
     if number_of_results:
         logger.info("Package has already been deployed.")
         return True
@@ -80,9 +79,9 @@ def delete_deployed_package(deployment_id):
     :param deployment_id: The ID of the deployment.
     :type deployment_id: str
     :return: The response text.
-    :rtype: str
+    :rtype: dict
     """
     resource_path = "/DeployedPackage/{}".format(deployment_id)
 
     response = boomi_cicd.requests_delete(resource_path)
-    return response.text
+    return response

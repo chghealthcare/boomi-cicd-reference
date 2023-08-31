@@ -1,10 +1,11 @@
 import argparse
 import json
 import os
-
-import requests
+import urllib3
 from ratelimit import limits, sleep_and_retry
 from retrying import retry
+
+import base64
 
 import boomi_cicd
 from boomi_cicd import logger
@@ -110,22 +111,25 @@ def requests_get_xml(resource_path):
     :param resource_path: The resource path for the API endpoint.
     :type resource_path: str
     :return: The response object containing the XML data.
-    :rtype: requests.Response
+    :rtype: str
     :raises requests.HTTPError: If the GET request fails (non-2xx response). A 503 response will be retried up to 3 times.
     """
     check_limit()
-    headers = {"Accept": "application/xml"}
+    headers = urllib3.HTTPHeaderDict()
+    headers.add("Accept", "application/xml")
+    headers.add("Authorization", get_authorization_token())
     url = boomi_cicd.BASE_URL + "/" + boomi_cicd.ACCOUNT_ID + resource_path
 
-    response = requests.get(
-        url, auth=(boomi_cicd.USERNAME, boomi_cicd.PASSWORD), headers=headers
-    )
+    response = urllib3.request("GET", url, headers=headers)
+
     logger.info(
-        "Response: {}".format(response.text.replace("\r", "").replace("\n", ""))
+        "Response: {}".format(
+            response.data.decode().replace("\r", "").replace("\n", "")
+        )
     )
 
-    response.raise_for_status()
-    return response
+    raise_for_status(response.status)
+    return response.data.decode()
 
 
 @retry(
@@ -140,19 +144,20 @@ def requests_get(resource_path):
     :param resource_path: The resource path for the API endpoint.
     :type resource_path: str
     :return: The response object containing the JSON data.
-    :rtype: requests.Response
+    :rtype: dict
     :raises requests.HTTPError: If the GET request fails (non-2xx response).  A 503 response will be retried up to 3 times.
     """
     check_limit()
-    headers = {"Accept": "application/json"}
-    url = boomi_cicd.BASE_URL + "/" + boomi_cicd.ACCOUNT_ID + resource_path
+    headers = urllib3.HTTPHeaderDict()
+    headers.add("Accept", "application/json")
+    headers.add("Authorization", get_authorization_token())
+    url = f"{boomi_cicd.BASE_URL}/{boomi_cicd.ACCOUNT_ID}{resource_path}"
 
-    response = requests.get(
-        url, auth=(boomi_cicd.USERNAME, boomi_cicd.PASSWORD), headers=headers
-    )
-    logger.info("Response: {}".format(response.text))
-    response.raise_for_status()
-    return response
+    response = urllib3.request("GET", url, headers=headers)
+
+    logger.info(f"Status: {response.status}. Response: {response.json()}")
+    raise_for_status(response.status)
+    return response.json()
 
 
 @retry(
@@ -169,23 +174,22 @@ def requests_post(resource_path, payload):
     :param payload: The payload to be sent in the request body (as JSON).
     :type payload: dict
     :return: The response object containing the JSON response data.
-    :rtype: requests.Response
+    :rtype: dict
     :raises requests.HTTPError: If the POST request fails (non-2xx response). A 503 response will be retried up to 3 times.
     """
     check_limit()
     logger.info("Request: {}".format(json.dumps(payload)))
-    headers = {"Accept": "application/json"}
+    headers = urllib3.HTTPHeaderDict()
+    headers.add("Accept", "application/json")
+    headers.add("Content-Type", "application/json")
+    headers.add("Authorization", get_authorization_token())
     url = boomi_cicd.BASE_URL + "/" + boomi_cicd.ACCOUNT_ID + resource_path
 
-    response = requests.post(
-        url,
-        auth=(boomi_cicd.USERNAME, boomi_cicd.PASSWORD),
-        json=payload,
-        headers=headers,
-    )
-    logger.info("Response: {}".format(response.text))
-    response.raise_for_status()
-    return response
+    response = urllib3.request("POST", url, body=json.dumps(payload), headers=headers)
+
+    logger.info(f"Status: {response.status}. Response: {response.json()}")
+    raise_for_status(response.status)
+    return response.json()
 
 
 @retry(
@@ -200,16 +204,29 @@ def requests_delete(resource_path):
     :param resource_path: The resource path for the API endpoint.
     :type resource_path: str
     :return: The response object containing the JSON response data.
-    :rtype: requests.Response
+    :rtype: dict
     :raises requests.HTTPError: If the DELETE request fails (non-2xx response). A 503 response will be retried up to 3 times.
     """
     check_limit()
-    headers = {"Accept": "application/json"}
+    headers = urllib3.HTTPHeaderDict()
+    headers.add("Accept", "application/json")
     url = boomi_cicd.BASE_URL + "/" + boomi_cicd.ACCOUNT_ID + resource_path
 
-    response = requests.delete(
-        url, auth=(boomi_cicd.USERNAME, boomi_cicd.PASSWORD), headers=headers
-    )
-    logger.info("Response: {}".format(response.text))
-    response.raise_for_status()
-    return response
+    response = urllib3.request("DELETE", url, headers=headers)
+
+    logger.info("Response: {}".format(response.data))
+    raise_for_status(response.status)
+    return response.json()
+
+
+def get_authorization_token():
+    token_bytes = (boomi_cicd.USERNAME + ":" + boomi_cicd.PASSWORD).encode("ascii")
+    token_bytes_base64 = base64.b64encode(token_bytes)
+    auth_token = token_bytes_base64.decode("ascii")
+    return "Basic " + auth_token
+
+
+def raise_for_status(status_code):
+    # Raise an exception if the response status is not 2xx
+    if status_code < 200 or status_code >= 300:
+        raise Exception("HTTPError: {}".format(status_code))
