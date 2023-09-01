@@ -1,5 +1,4 @@
 import boomi_cicd
-import json
 
 from boomi_cicd import logger
 
@@ -31,7 +30,7 @@ def create_packaged_component(component_id, package_version, notes):
 
     response = boomi_cicd.requests_post(resource_path, payload)
 
-    package_id = json.loads(response.text)["packageId"]
+    package_id = response["packageId"]
     return package_id
 
 
@@ -63,10 +62,10 @@ def query_packaged_component(component_id, package_version):
     response = boomi_cicd.requests_post(resource_path, payload)
 
     package_id = ""
-    if json.loads(response.text)["numberOfResults"] > 0:
+    if response["numberOfResults"] > 0:
         logger.info(
             f"Packaged component has already been created. ComponentId: {component_id}, PackageId: {package_version}"
         )
-        package_id = json.loads(response.text)["result"][0]["packageId"]
+        package_id = response["result"][0]["packageId"]
 
     return package_id
