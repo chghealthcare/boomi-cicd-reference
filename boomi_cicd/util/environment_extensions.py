@@ -207,11 +207,11 @@ def get_environment_extensions(environment_id):
     resource_path = "/EnvironmentExtensions/{}".format(environment_id)
     response = boomi_cicd.requests_get(resource_path)
 
-    return response
+    return json.loads(response.text)
 
 
 def update_environment_extensions(environment_id, payload):
     resource_path = "/EnvironmentExtensions/{}/update}".format(environment_id)
     response = boomi_cicd.requests_post(resource_path, payload)
 
-    return response
+    return json.loads(response.text)

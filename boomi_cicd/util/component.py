@@ -12,8 +12,8 @@ def query_component(component_id):
     :param component_id: The ID of the component to query.
     :return: The XML text of the component.
     """
-    resource_path = f"/Component/{component_id}"
+    resource_path = "/Component/{}".format(component_id)
 
     response = boomi_cicd.requests_get_xml(resource_path)
 
-    return response
+    return response.text

@@ -1,6 +1,8 @@
+import json
 import sys
 
 import boomi_cicd
+import logging
 
 
 # from boomi_cicd.util.logging import *
@@ -28,9 +30,10 @@ def query_atom(atom_name):
 
     response = boomi_cicd.requests_post(resource_path, payload)
 
+    json_response = json.loads(response.text)
     boomi_cicd.info("hello")
-    if response["numberOfResults"] == 0:
+    if json_response["numberOfResults"] == 0:
         boomi_cicd.error("Atom not found. atomname: {}".format(boomi_cicd.ATOM_NAME))
         sys.exit(1)
-    atom_id = response["result"][0]["id"]
+    atom_id = json.loads(response.text)["result"][0]["id"]
     return atom_id
