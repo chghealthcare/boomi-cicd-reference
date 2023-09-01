@@ -9,7 +9,7 @@ import boomi_cicd
 class TestAtom(unittest.TestCase):
     @patch('boomi_cicd.requests_post')
     def test_query_atom(self, mock_post):
-        mock_post.return_value = {
+        mock_post.return_value.text = json.dumps({
             "@type": "QueryResult",
             "result": [
                 {
@@ -28,7 +28,7 @@ class TestAtom(unittest.TestCase):
                 }
             ],
             "numberOfResults": 1
-        }
+        })
         mock_env = {
             "baseUrl": "https://api.boomi.com/api/rest/v1",
             "accountId": "boomi_account-123",
@@ -56,11 +56,11 @@ class TestAtom(unittest.TestCase):
 
     @patch('boomi_cicd.requests_post')
     def test_query_atom_no_results(self, mock_post):
-        mock_post.return_value = {
+        mock_post.return_value.text = json.dumps({
             "@type": "QueryResult",
             "result": [],
             "numberOfResults": 0
-        }
+        })
         mock_env = {
             "baseUrl": "https://api.boomi.com/api/rest/v1",
             "accountId": "boomi_test-WI542T",
