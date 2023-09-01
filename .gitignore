@@ -21,4 +21,3 @@ tests/.pytest_cache/
 # Environment specific
 .env
 
-/docs/
