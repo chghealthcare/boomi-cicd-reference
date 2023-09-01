@@ -3,6 +3,7 @@ boomi_components/
 cloned_repo/
 docs/_build/
 local/
+mkdocs/
 venv/
 
 # Files
