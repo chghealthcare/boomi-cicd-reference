@@ -1,5 +1,10 @@
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, Mock, PropertyMock
+
+import pytest
+import json
+
+from requests import HTTPError
 
 import boomi_cicd
 

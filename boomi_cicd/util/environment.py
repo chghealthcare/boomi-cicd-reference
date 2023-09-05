@@ -1,4 +1,5 @@
 import boomi_cicd
+import json
 import sys
 
 from boomi_cicd import logger
@@ -25,10 +26,13 @@ def query_environment(environment_name):
 
     response = boomi_cicd.requests_post(resource_path, payload)
 
-    if response["numberOfResults"] == 0:
+    json_response = json.loads(response.text)
+    if json_response["numberOfResults"] == 0:
         logger.error(
-            f"Environment not found. EnvironmentName: {boomi_cicd.ENVIRONMENT_NAME}"
+            "Environment not found. EnvironmentName: {}".format(
+                boomi_cicd.ENVIRONMENT_NAME
+            )
         )
         sys.exit(1)
-    environment_id = response["result"][0]["id"]
+    environment_id = json_response["result"][0]["id"]
     return environment_id

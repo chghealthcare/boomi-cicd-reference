@@ -17,4 +17,4 @@ def get_package_component_manifest(packaged_component_id):
 
     response = boomi_cicd.requests_get_xml(resource_path)
 
-    return response
+    return response.text

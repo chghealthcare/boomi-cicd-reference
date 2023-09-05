@@ -1,4 +1,5 @@
 import boomi_cicd
+import json
 import sys
 
 from boomi_cicd import logger
@@ -30,12 +31,13 @@ def query_process_schedules(atom_id, process_id):
 
     response = boomi_cicd.requests_post(resource_path, payload)
 
-    if response["numberOfResults"] == 0:
+    json_response = json.loads(response.text)
+    if json_response["numberOfResults"] == 0:
         logger.error(
             f"Process is not deployed. Atom Name: {boomi_cicd.ATOM_NAME}, Process Id: {process_id}"
         )
         sys.exit(1)
-    conceptual_id = response["result"][0]["id"]
+    conceptual_id = json.loads(response.text)["result"][0]["id"]
     return conceptual_id
 
 
