@@ -16,9 +16,9 @@ It includes all the information you need to get started with the library, includ
 
 ## Pre-requistes
 
-* Python 3
+* Python 3.6 or higher
 * Additional libraries, which can be installed with `pip install -r requirements.txt`
-
+* git v1.7.0 or higher: Optional. Only required when executing the `component_xml_git.py` script.
 
 ## Project Structure
 
@@ -129,7 +129,4 @@ sphinx-build -b html . _build
 ```
 
 
-## Ways to Contribute
 
-1. Create a pull request to submit changes.
-2. Update the documentation. The documentation is built using Sphinx. The source files are written in reStructuredText (.rst) and located in the docs/source directory.

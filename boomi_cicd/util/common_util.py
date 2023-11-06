@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+from pathlib import Path
 
 import requests
 from ratelimit import limits, sleep_and_retry
@@ -19,9 +20,7 @@ def parse_json(file_path):
     :return: The parsed data from the JSON file.
     :rtype: dict or list
     """
-    f = open(os.path.join(boomi_cicd.CLI_BASE_DIR, file_path))
-    data = json.load(f)
-    f.close()
+    data = open_json_file(file_path)
     return data
 
 
@@ -34,9 +33,26 @@ def parse_release(file_path):
     :return: The parsed data from the release file.
     :rtype: dict
     """
-    f = open(os.path.join(boomi_cicd.RELEASE_BASE_DIR, file_path))
-    data = json.load(f)
-    f.close()
+    file_path = os.path.join(boomi_cicd.RELEASE_BASE_DIR, file_path)
+    logger.info(f"Parsing release file: {file_path}")
+    data = open_json_file(file_path)
+    return data
+
+
+def open_json_file(file_path):
+    """
+    Open a JSON file and return the parsed data.
+    Function used to sanatize the file path and check if the file exists.
+    :param file_path:
+    :return: JSON data from file path.
+    :rtype: dict
+    """
+    path = Path(file_path).resolve()
+    logger.info(f"Opening file: {path}")
+    if not path.is_file():
+        raise FileNotFoundError("Invalid file_path: The provided path does not exist or is not a file.")
+    with path.open("r") as f:
+        data = json.load(f)
     return data
 
 
@@ -114,6 +130,7 @@ def requests_get_xml(resource_path):
     :raises requests.HTTPError: If the GET request fails (non-2xx response). A 503 response will be retried up to 3 times.
     """
     check_limit()
+    logger.info(resource_path)
     headers = {"Accept": "application/xml"}
     url = boomi_cicd.BASE_URL + "/" + boomi_cicd.ACCOUNT_ID + resource_path
 
@@ -144,6 +161,7 @@ def requests_get(resource_path):
     :raises requests.HTTPError: If the GET request fails (non-2xx response).  A 503 response will be retried up to 3 times.
     """
     check_limit()
+    logger.info(resource_path)
     headers = {"Accept": "application/json"}
     url = boomi_cicd.BASE_URL + "/" + boomi_cicd.ACCOUNT_ID + resource_path
 
@@ -173,6 +191,7 @@ def requests_post(resource_path, payload):
     :raises requests.HTTPError: If the POST request fails (non-2xx response). A 503 response will be retried up to 3 times.
     """
     check_limit()
+    logger.info(resource_path)
     logger.info("Request: {}".format(json.dumps(payload)))
     headers = {"Accept": "application/json"}
     url = boomi_cicd.BASE_URL + "/" + boomi_cicd.ACCOUNT_ID + resource_path
@@ -204,6 +223,7 @@ def requests_delete(resource_path):
     :raises requests.HTTPError: If the DELETE request fails (non-2xx response). A 503 response will be retried up to 3 times.
     """
     check_limit()
+    logger.info(resource_path)
     headers = {"Accept": "application/json"}
     url = boomi_cicd.BASE_URL + "/" + boomi_cicd.ACCOUNT_ID + resource_path
 

@@ -16,8 +16,9 @@ The project is organized into three sections:
 
 Pre-requisites
 ==============
-* Python 3
+* Python 3.6 or higher
 * Additional libraries, which can be installed with ``pip install -r requirements.txt``
+* git v1.7.0 or higher: Optional. Only required when executing ``component_xml_git.py``
 
 
 Documemtation Overview

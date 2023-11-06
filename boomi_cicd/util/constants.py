@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 BASE_URL = os.environ.get("BOOMI_BASE_URL")
 """Base URL for Boomi AtomSphere API."""
 ACCOUNT_ID = os.environ.get("BOOMI_ACCOUNT_ID")

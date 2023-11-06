@@ -3,6 +3,7 @@ import unittest
 from unittest.mock import patch
 
 import pytest
+
 import boomi_cicd
 
 
@@ -52,7 +53,7 @@ class TestEnvironment(unittest.TestCase):
             "environmentName": "Fake Environment",
             "workingDirectory": "C:\\Code\\VSCode\\boomi-cli\\"
         }
-        with pytest.raises(SystemExit) as pytest_wrapped_e:
+        with pytest.raises(ValueError) as pytest_wrapped_e:
             result = boomi_cicd.query_environment(mock_env["environmentName"])
         # Assert that the function raises a SystemExit exception
-        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e.type == ValueError

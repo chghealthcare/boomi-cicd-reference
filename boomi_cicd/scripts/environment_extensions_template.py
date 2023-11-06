@@ -1,7 +1,6 @@
-import boomi_cicd
 import json
-import os
 
+import boomi_cicd
 
 # The environment_extensions_template.py script is used to generate a template for environment extensions
 # based on the processes within the release json. Once the template is generated and populated, it can be
@@ -29,7 +28,7 @@ for release in releases["pipelines"]:
     pp_dict = boomi_cicd.parse_pp_extensions(pp_dict, response)
     cross_reference_dict = boomi_cicd.parse_cross_reference_extensions(cross_reference_dict, response)
 
-print("=======================================")
+
 populated_env_template["connections"]["connection"] = connections_dict
 populated_env_template["properties"]["property"] = dpp_dict
 populated_env_template["processProperties"]["ProcessProperty"] = pp_dict

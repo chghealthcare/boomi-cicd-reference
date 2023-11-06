@@ -1,4 +1,5 @@
 import boomi_cicd
+import boomi_cicd.util.json.change_listener_status
 
 
 
@@ -19,13 +20,12 @@ def change_listener_status(listener_id, atom_id, action):
     :type atom_id: str
     :param action: The action to perform on the listener. pause, resume, restart, pause_all, resume_all, or restart_all.
     :type action: str
-    :return: True if the listener status change was successful. If the request fails, an error is logged.
+    :return: True if the listener status change was successful. If the request fails, an error is raised.
     :rtype: bool
     """
     resource_path = "/changeListenerStatus"
-    change_listener_status_json =  "boomi_cicd/util/json/changeListenerStatus.json"
 
-    payload = boomi_cicd.parse_json(change_listener_status_json)
+    payload = boomi_cicd.util.json.change_listener_status.execute()
     payload["listenerId"] = listener_id
     payload["containerId"] = atom_id
     payload["action"] = action

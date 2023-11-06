@@ -1,7 +1,8 @@
-import boomi_cicd
 import json
 import sys
 
+import boomi_cicd
+import boomi_cicd.util.json.process_schedule
 from boomi_cicd import logger
 
 
@@ -21,9 +22,8 @@ def query_process_schedules(atom_id, process_id):
     :raises: SystemExit: If the process is not deployed.
     """
     resource_path = "/ProcessSchedules/query"
-    process_schedule_query = "boomi_cicd/util/json/processScheduleQuery.json"
 
-    payload = boomi_cicd.parse_json(process_schedule_query)
+    payload = boomi_cicd.util.json.process_schedule.query()
     payload["QueryFilter"]["expression"]["nestedExpression"][0]["argument"][0] = atom_id
     payload["QueryFilter"]["expression"]["nestedExpression"][1]["argument"][
         0
@@ -58,9 +58,8 @@ def update_process_schedules(component_id, conceptual_id, atom_id, schedules):
     :raises: SystemExit: If the schedule format is invalid.
     """
     resource_path = "/ProcessSchedules/{}/update".format(conceptual_id)
-    process_schedule_updated = "boomi_cicd/util/json/processScheduleUpdate.json"
 
-    payload = boomi_cicd.parse_json(process_schedule_updated)
+    payload = boomi_cicd.util.json.process_schedule.update()
     payload["processId"] = component_id
     payload["atomId"] = atom_id
     payload["id"] = conceptual_id
