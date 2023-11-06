@@ -1,13 +1,11 @@
 import json
-import sys
 
 import boomi_cicd
-import logging
+import boomi_cicd.util.json.atom
 
-
-# from boomi_cicd.util.logging import *
 
 # https://help.boomi.com/bundle/developer_apis/page/r-atm-Atom_object.html
+
 
 def query_atom(atom_name):
     """
@@ -21,19 +19,17 @@ def query_atom(atom_name):
     :type atom_name: str
     :return: The ID of the queried Atom.
     :rtype: str
+    :raises ValueError: If the Atom is not found.
     """
     resource_path = "/Atom/query"
-    environment_query = "boomi_cicd/util/json/atomQuery.json"
 
-    payload = boomi_cicd.parse_json(environment_query)
+    payload = boomi_cicd.util.json.atom.query()
     payload["QueryFilter"]["expression"]["argument"][0] = atom_name
 
     response = boomi_cicd.requests_post(resource_path, payload)
 
     json_response = json.loads(response.text)
-    boomi_cicd.info("hello")
     if json_response["numberOfResults"] == 0:
-        boomi_cicd.error("Atom not found. atomname: {}".format(boomi_cicd.ATOM_NAME))
-        sys.exit(1)
+        raise ValueError(f"Atom not found. Atom Name: {atom_name}")
     atom_id = json.loads(response.text)["result"][0]["id"]
     return atom_id

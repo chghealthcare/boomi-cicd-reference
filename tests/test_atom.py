@@ -1,8 +1,9 @@
+import json
 import unittest
 from unittest.mock import patch
 
 import pytest
-import json
+
 import boomi_cicd
 
 
@@ -70,7 +71,7 @@ class TestAtom(unittest.TestCase):
             "atomName": "Fake Atom",
             "workingDirectory": "C:\\Code\\VSCode\\boomi-cli\\"
         }
-        with pytest.raises(SystemExit) as pytest_wrapped_e:
+        with pytest.raises(ValueError) as pytest_wrapped_e:
             result = boomi_cicd.query_atom(mock_env["atomName"])
         # Assert that the function raises a SystemExit exception
-        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e.type == ValueError

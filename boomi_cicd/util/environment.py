@@ -1,7 +1,7 @@
-import boomi_cicd
 import json
-import sys
 
+import boomi_cicd
+import boomi_cicd.util.json.environment
 from boomi_cicd import logger
 
 
@@ -19,9 +19,8 @@ def query_environment(environment_name):
     :raises SystemExit: If the environment is not found.
     """
     resource_path = "/Environment/query"
-    logger.info(resource_path)
-    environment_query = "boomi_cicd/util/json/environmentQuery.json"
-    payload = boomi_cicd.parse_json(environment_query)
+
+    payload = boomi_cicd.util.json.environment.query()
     payload["QueryFilter"]["expression"]["argument"][0] = environment_name
 
     response = boomi_cicd.requests_post(resource_path, payload)
@@ -29,10 +28,8 @@ def query_environment(environment_name):
     json_response = json.loads(response.text)
     if json_response["numberOfResults"] == 0:
         logger.error(
-            "Environment not found. EnvironmentName: {}".format(
-                boomi_cicd.ENVIRONMENT_NAME
-            )
+            f"Environment not found. EnvironmentName: {environment_name}"
         )
-        sys.exit(1)
+        raise ValueError(f"Environment not found. Environment Name: {environment_name}")
     environment_id = json_response["result"][0]["id"]
     return environment_id

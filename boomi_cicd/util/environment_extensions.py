@@ -1,8 +1,43 @@
-import boomi_cicd
 import json
-import xml.etree.ElementTree as ET
+
+import defusedxml.ElementTree as ET
+
+import boomi_cicd
+
 
 # https://help.boomi.com/bundle/developer_apis/page/int-Environment_extensions_object.html
+
+
+def get_environment_extensions(environment_id):
+    """
+    Get the extensions for the specified environment.
+
+    :param environment_id: The ID of the environment.
+    :type environment_id: str
+    :return: The environment extensions.
+    :rtype: dict
+    """
+    resource_path = f"/EnvironmentExtensions/{environment_id}"
+
+    response = boomi_cicd.requests_get(resource_path)
+
+    return json.loads(response.text)
+
+
+def update_environment_extensions(environment_id, payload):
+    """
+    Update the extensions for the specified environment.
+    :param environment_id: The ID of the Boomi environment.
+    :param payload: The payload containing the environment extensions.
+    The environment_extensions_template.py script can be used to generate a template for the payload.
+    :return: Response from the Environment Extensions API.
+    :rtype: dict
+    """
+    resource_path = f"/EnvironmentExtensions/{environment_id}/update"
+
+    response = boomi_cicd.requests_post(resource_path, payload)
+
+    return json.loads(response.text)
 
 
 def parse_connection_extensions(connection_array, xml_response):
@@ -193,25 +228,3 @@ def parse_cross_reference_extensions(cross_reference, xml_response):
             cross_reference.append(new_cross_reference)
 
     return cross_reference
-
-
-def get_environment_extensions(environment_id):
-    """
-    Get the extensions for the specified environment.
-
-    :param environment_id: The ID of the environment.
-    :type environment_id: str
-    :return: The environment extensions.
-    :rtype: dict
-    """
-    resource_path = "/EnvironmentExtensions/{}".format(environment_id)
-    response = boomi_cicd.requests_get(resource_path)
-
-    return json.loads(response.text)
-
-
-def update_environment_extensions(environment_id, payload):
-    resource_path = "/EnvironmentExtensions/{}/update}".format(environment_id)
-    response = boomi_cicd.requests_post(resource_path, payload)
-
-    return json.loads(response.text)

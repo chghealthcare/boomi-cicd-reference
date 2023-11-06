@@ -1,6 +1,7 @@
-import boomi_cicd
 import json
 
+import boomi_cicd
+import boomi_cicd.util.json.packaged_component
 from boomi_cicd import logger
 
 
@@ -21,8 +22,8 @@ def create_packaged_component(component_id, package_version, notes):
     :rtype: str
     """
     resource_path = "/PackagedComponent"
-    logger.info(resource_path)
-    packaged_component_query = "boomi_cicd/util/json/createPackagedComponent.json"
+
+    packaged_component_query = boomi_cicd.util.json.packaged_component.create()
 
     payload = boomi_cicd.parse_json(packaged_component_query)
     payload["componentId"] = component_id
@@ -47,12 +48,11 @@ def query_packaged_component(component_id, package_version):
     :rtype: str
     """
     resource_path = "/PackagedComponent/query"
-    logger.info(resource_path)
+
     logger.info(f"ComponentId: {component_id}")
     logger.info(f"PackagedVersion: {package_version}")
-    packaged_component_query = "boomi_cicd/util/json/packagedComponentQuery.json"
 
-    payload = boomi_cicd.parse_json(packaged_component_query)
+    payload = boomi_cicd.util.json.packaged_component.query()
     payload["QueryFilter"]["expression"]["nestedExpression"][0]["argument"][
         0
     ] = component_id

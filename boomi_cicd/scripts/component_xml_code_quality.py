@@ -1,7 +1,11 @@
-import boomi_cicd
 import os
 
+import boomi_cicd
+
 from lxml import etree
+
+# TODO: Clean up into smaller functions
+
 # Set report variables
 REPORT_TITLE = "Packaged Components Code Quality Report"
 REPORT_HEADERS = [

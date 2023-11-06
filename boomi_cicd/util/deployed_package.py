@@ -1,7 +1,9 @@
-import boomi_cicd
 import json
 
+import boomi_cicd
+import boomi_cicd.util.json.deployed_package
 from boomi_cicd import logger
+
 
 # https://help.boomi.com/bundle/developer_apis/page/r-atm-Deployed_Package_object.html
 
@@ -20,8 +22,8 @@ def create_deployed_package(release, package_id, environment_id):
     :rtype: str
     """
     resource_path = "/DeployedPackage"
-    environment_query = "boomi_cicd/util/json/deployedPackageCreate.json"
-    payload = boomi_cicd.parse_json(environment_query)
+
+    payload = boomi_cicd.util.json.deployed_package.create()
     payload["environmentId"] = environment_id
     payload["packageId"] = package_id
     payload["notes"] = release["notes"]
@@ -49,8 +51,8 @@ def query_deployed_package(package_id, environment_id, currently_deployed=True):
     :rtype: bool
     """
     resource_path = "/DeployedPackage/query"
-    environment_query = "boomi_cicd/util/json/deployedPackageQuery.json"
-    payload = boomi_cicd.parse_json(environment_query)
+
+    payload = boomi_cicd.util.json.deployed_package.query()
     payload["QueryFilter"]["expression"]["nestedExpression"][0]["argument"][
         0
     ] = environment_id
