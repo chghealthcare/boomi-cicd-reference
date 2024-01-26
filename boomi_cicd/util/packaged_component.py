@@ -23,9 +23,7 @@ def create_packaged_component(component_id, package_version, notes):
     """
     resource_path = "/PackagedComponent"
 
-    packaged_component_query = boomi_cicd.util.json.packaged_component.create()
-
-    payload = boomi_cicd.parse_json(packaged_component_query)
+    payload = boomi_cicd.util.json.packaged_component.create()
     payload["componentId"] = component_id
     payload["packageVersion"] = package_version
     payload["notes"] = notes
