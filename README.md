@@ -115,7 +115,7 @@ python boomi_cicd/scripts/releasePipeline.py
 A variety of release templates are at your disposal, each accompanied by comprehensive documentation detailing their usage instructions. These templates serve as practical demonstrations, showcasing the implementation of a fundamental release pipeline for deploying processes to a Boomi environment. You can use the release pipelines as-is or as a starting point for your own release pipeline. Each release pipeline parses a release JSON file, checks if a package has been created, creates one if not, and checks if the package has been deployed, deploys it if not.
 
 * [Azure DevOps](https://boomi-cicd-cli-py.s3.amazonaws.com/pipelines/azure-devops.html)
-* [GitHub Actions](https://boomi-cicd-cli-py.s3.amazonaws.com/pipelines/github-actions.html): TODO
+* [GitHub Actions](https://boomi-cicd-cli-py.s3.amazonaws.com/pipelines/github-actions.html): 
 * [Jenkins](https://boomi-cicd-cli-py.s3.amazonaws.com/pipelines/jenkins.html)
 
 
