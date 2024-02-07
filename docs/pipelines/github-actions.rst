@@ -26,6 +26,8 @@ First create a `fine-grained Private Access Token (PAT) <https://docs.github.com
 
 Within the repository, create a new YAML file in the .github/workflows directory. This file will contain the GitHub Actions workflow that will be used to deploy the Boomi integrations. Below is an example repo directory structure that is used within the GitHub Actions template.
 
+The GitHub Actions template is found within `boomi-cicd-cli-py/boomi_cicd/templates/github_actions`. Update the `<company-organization>` within the Checkout Boomi CICD Library step within the GitHub actions workflow to the name of your organization.
+
 ::
 
    boomi-cicd-release/
