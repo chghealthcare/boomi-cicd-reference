@@ -13,6 +13,8 @@ Modules
    deployed-package
    environment
    environment-extensions
+   execution-record
+   execution-request
    package-component-manifest
    packaged-component
    process-schedule-status

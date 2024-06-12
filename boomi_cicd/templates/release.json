@@ -5,7 +5,8 @@
       "packageVersion": "2.0",
       "componentId": "83d6013f-96f5-4a75-a97b-f4934b0ec2e8",
       "notes": "This is an example set of notes",
-      "schedule": "0 0 1 * * * ; 30 0 2-7 * * *"
+      "schedule": "0 0 1 * * * ; 30 0 2-7 * * *",
+      "automatedTestId": "used within automated_testing.py"
     },
     {
       "processName": "An Example Listener Process",

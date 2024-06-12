@@ -212,6 +212,41 @@ def requests_post(resource_path, payload):
     wait_fixed=boomi_cicd.RATE_LIMIT_MILLISECONDS,
     retry_on_result=lambda x: x == 503,
 )
+def requests_post_xml(resource_path, payload):
+    """
+    Perform a POST request to the Atomsphere API with the specified payload.
+
+    :param resource_path: The resource path for the API endpoint.
+    :type resource_path: str
+    :param payload: The payload to be sent in the request body as XML.
+    :type payload: str
+    :return: The response object containing the JSON response data.
+    :rtype: requests.Response
+    :raises requests.HTTPError: If the POST request fails (non-2xx response). A 503 response will be retried up to 3 times.
+    """
+    check_limit()
+    logger.info(resource_path)
+    logger.info("Request: {}".format(payload))
+    headers = {"Accept": "application/xml", "Content-Type": "application/xml"}
+    url = boomi_cicd.BASE_URL + "/" + boomi_cicd.ACCOUNT_ID + resource_path
+
+    response = requests.post(
+        url,
+        auth=(boomi_cicd.USERNAME, boomi_cicd.PASSWORD),
+        data=payload,
+        headers=headers,
+    )
+    logger.info("Response: {}".format(response.text))
+    response.raise_for_status()
+    return response.text
+
+
+
+@retry(
+    stop_max_attempt_number=3,
+    wait_fixed=boomi_cicd.RATE_LIMIT_MILLISECONDS,
+    retry_on_result=lambda x: x == 503,
+)
 def requests_delete(resource_path):
     """
     Perform a DELETE request to the Atomsphere API.

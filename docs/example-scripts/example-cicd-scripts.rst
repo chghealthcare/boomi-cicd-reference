@@ -9,3 +9,4 @@ Example CICD Scripts
    release-pipeline-dr
    environment-extensions-update
    component-xml-repo
+   automated-testing

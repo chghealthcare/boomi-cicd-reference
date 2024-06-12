@@ -36,8 +36,7 @@ class TestAtom(unittest.TestCase):
             "username": "",
             "password": "",
             "environmentName": "Test Cloud Environment",
-            "atomName": "Test Atom",
-            "workingDirectory": "C:\\Code\\VSCode\\boomi-cli\\"
+            "atomName": "Test Atom"
         }
         expected_payload = {
             "QueryFilter": {
@@ -50,7 +49,6 @@ class TestAtom(unittest.TestCase):
         }
         result = boomi_cicd.query_atom(mock_env["atomName"])
 
-        # Assert the function calls requests_post with the expected arguments
         mock_post.assert_called_with("/Atom/query", expected_payload)
         # Assert the function returns the expected Atom ID
         assert result == "8a0a749b-4e1f-45c8-b5cc-e637f7c282e5"
@@ -72,6 +70,5 @@ class TestAtom(unittest.TestCase):
             "workingDirectory": "C:\\Code\\VSCode\\boomi-cli\\"
         }
         with pytest.raises(ValueError) as pytest_wrapped_e:
-            result = boomi_cicd.query_atom(mock_env["atomName"])
-        # Assert that the function raises a SystemExit exception
+            boomi_cicd.query_atom(mock_env["atomName"])
         assert pytest_wrapped_e.type == ValueError

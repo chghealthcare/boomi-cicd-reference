@@ -1,10 +1,5 @@
-import json
-
-
 def query():
-    data = json.loads(
-        """
-        {
+    data = {
             "QueryFilter": {
                 "expression": {
                     "argument": [""],
@@ -12,6 +7,5 @@ def query():
                     "property": "name"
                 }
             }
-        }"""
-    )
+        }
     return data
