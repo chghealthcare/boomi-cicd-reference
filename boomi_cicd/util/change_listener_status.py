@@ -2,7 +2,6 @@ import boomi_cicd
 import boomi_cicd.util.json.change_listener_status
 
 
-
 # https://help.boomi.com/bundle/developer_apis/page/r-atm-Change_listener_status.html
 
 

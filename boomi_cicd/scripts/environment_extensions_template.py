@@ -23,10 +23,14 @@ for release in releases["pipelines"]:
     component_id = release["componentId"]
 
     response = boomi_cicd.query_component(component_id)
-    connections_dict = boomi_cicd.parse_connection_extensions(connections_dict, response)
+    connections_dict = boomi_cicd.parse_connection_extensions(
+        connections_dict, response
+    )
     dpp_dict = boomi_cicd.parse_dpp_extensions(dpp_dict, response)
     pp_dict = boomi_cicd.parse_pp_extensions(pp_dict, response)
-    cross_reference_dict = boomi_cicd.parse_cross_reference_extensions(cross_reference_dict, response)
+    cross_reference_dict = boomi_cicd.parse_cross_reference_extensions(
+        cross_reference_dict, response
+    )
 
 
 populated_env_template["connections"]["connection"] = connections_dict

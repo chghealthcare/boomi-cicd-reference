@@ -27,9 +27,7 @@ def query_environment(environment_name):
 
     json_response = json.loads(response.text)
     if json_response["numberOfResults"] == 0:
-        logger.error(
-            f"Environment not found. EnvironmentName: {environment_name}"
-        )
+        logger.error(f"Environment not found. EnvironmentName: {environment_name}")
         raise ValueError(f"Environment not found. Environment Name: {environment_name}")
     environment_id = json_response["result"][0]["id"]
     return environment_id

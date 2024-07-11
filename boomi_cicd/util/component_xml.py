@@ -57,6 +57,7 @@ def clone_repository():
     # GitPython requires git to be installed.
     # This allows for users to not install git unless the component_xml_git.py script is used.
     from git import Repo
+
     repo = Repo.clone_from(boomi_cicd.COMPONENT_GIT_URL, boomi_cicd.COMPONENT_REPO_NAME)
     logger.info(f"Git Repo Status: {repo.git.status()}".replace("\n", " "))
     return repo

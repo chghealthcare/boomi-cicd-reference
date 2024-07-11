@@ -1,5 +1,4 @@
 import json
-
 import boomi_cicd
 import boomi_cicd.util.json.execution_request
 from boomi_cicd import logger
@@ -30,10 +29,3 @@ def create_execution_request(atom_id, process_id):
         logger.error("ExecutionRequest was not successful")
         raise ValueError("ExecutionRequest was not successful")
     return json_response["requestId"]
-
-
-
-
-
-
-

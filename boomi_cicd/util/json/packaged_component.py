@@ -38,4 +38,3 @@ def query():
         }"""
     )
     return data
-

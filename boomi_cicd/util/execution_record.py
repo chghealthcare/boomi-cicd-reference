@@ -1,7 +1,5 @@
 import time
-
 import boomi_cicd
-# import boomi_cicd.util.json.execution_record
 from boomi_cicd import logger
 
 
@@ -44,21 +42,17 @@ def get_execution_status(request_id, request_internal_sec=10, max_wait_sec=300):
     """
 
     response = None
-    execution_count = 0
+    attempt = 0
     response_status_code = 202
     timeout = time.time() + max_wait_sec
 
     while response_status_code == 202:
-        if response_status_code == 202:
-            # Wait interval can not be less than zero
-            if request_internal_sec < 0:
-                request_internal_sec = 10
-            time.sleep(request_internal_sec)
-        execution_count += 1
-        logger.info(f"Getting Status of Execution Record. Attempt {execution_count}.")
-
+        attempt += 1
+        logger.info(f"Getting Status of Execution Record. Attempt {attempt}.")
         response = get_execution_record(request_id)
         response_status_code = response.status_code
+        if response_status_code == 202:
+            time.sleep(request_internal_sec)
 
         if time.time() > timeout:
             logger.info(f"get_execution_status failed after {max_wait_sec} seconds.")
@@ -70,7 +64,7 @@ def get_execution_status(request_id, request_internal_sec=10, max_wait_sec=300):
 
 
 def get_completed_execution_status(
-    request_id, request_internal_sec=10, max_wait_sec=300
+    request_id, request_interval_sec=10, max_wait_sec=300
 ):
     """
     Sends a GET request to the Boomi AtomSphere API to retrieve the completed execution status for a given request ID.
@@ -78,7 +72,7 @@ def get_completed_execution_status(
     This function will return the final status of the process execution.
 
     :param str request_id: The request ID from Execution Request.
-    :param int request_internal_sec: The interval in seconds between each request. Default is 10 seconds.
+    :param int request_interval_sec: The interval in seconds between each request. Default is 10 seconds.
     :param int max_wait_sec: The maximum time in seconds to keep making a request. Default is 300 seconds, 5 minutes.
     :return: The response from the Atomsphere API ExecutionRecord call. The dict will contain executionId and status.
     :rtype: dict
@@ -92,18 +86,15 @@ def get_completed_execution_status(
 
     while status == "INPROCESS":
         execution_count += 1
-        logger.info(f"Getting Completion Status of Execution Record. Attempt {execution_count}.")
-
-        response = get_execution_status(
-            request_id, request_internal_sec, max_wait_sec
+        logger.info(
+            f"Getting Completion Status of Execution Record. Attempt {execution_count}."
         )
+
+        response = get_execution_status(request_id, request_interval_sec, max_wait_sec)
         status = response.get("status")
 
         if status == "INPROCESS" or status is None:
-            # Wait interval can not be less than zero
-            if request_internal_sec < 0:
-                request_internal_sec = 10
-            time.sleep(request_internal_sec)
+            time.sleep(request_interval_sec)
         if time.time() > timeout:
             logger.info(f"get_execution_status failed after {max_wait_sec} seconds.")
             raise TimeoutError(

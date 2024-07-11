@@ -42,4 +42,3 @@ def query():
         }"""
     )
     return data
-

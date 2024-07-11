@@ -50,7 +50,9 @@ def open_json_file(file_path):
     path = Path(file_path).resolve()
     logger.info(f"Opening file: {path}")
     if not path.is_file():
-        raise FileNotFoundError("Invalid file_path: The provided path does not exist or is not a file.")
+        raise FileNotFoundError(
+            "Invalid file_path: The provided path does not exist or is not a file."
+        )
     with path.open("r") as f:
         data = json.load(f)
     return data
@@ -121,7 +123,7 @@ def check_limit():
 )
 def requests_get_xml(resource_path):
     """
-    Perform a GET request to the Atomsphere API and retrieve XML data.
+    DEPRECIATED. Perform a GET request to the Atomsphere API and retrieve XML data.
 
     :param resource_path: The resource path for the API endpoint.
     :type resource_path: str
@@ -152,7 +154,7 @@ def requests_get_xml(resource_path):
 )
 def requests_get(resource_path):
     """
-    Perform a GET request to the Atomsphere API and retrieve JSON data.
+    DEPRECIATED. Perform a GET request to the Atomsphere API and retrieve JSON data.
 
     :param resource_path: The resource path for the API endpoint.
     :type resource_path: str
@@ -180,7 +182,7 @@ def requests_get(resource_path):
 )
 def requests_post(resource_path, payload):
     """
-    Perform a POST request to the Atomsphere API with the specified payload.
+    DEPRECIATED. Perform a POST request to the Atomsphere API with the specified payload.
 
     :param resource_path: The resource path for the API endpoint.
     :type resource_path: str
@@ -214,7 +216,7 @@ def requests_post(resource_path, payload):
 )
 def requests_post_xml(resource_path, payload):
     """
-    Perform a POST request to the Atomsphere API with the specified payload.
+    DEPRECIATED. Perform a POST request to the Atomsphere API with the specified payload.
 
     :param resource_path: The resource path for the API endpoint.
     :type resource_path: str
@@ -241,7 +243,6 @@ def requests_post_xml(resource_path, payload):
     return response.text
 
 
-
 @retry(
     stop_max_attempt_number=3,
     wait_fixed=boomi_cicd.RATE_LIMIT_MILLISECONDS,
@@ -249,7 +250,7 @@ def requests_post_xml(resource_path, payload):
 )
 def requests_delete(resource_path):
     """
-    Perform a DELETE request to the Atomsphere API.
+    DEPRECIATED. Perform a DELETE request to the Atomsphere API.
 
     :param resource_path: The resource path for the API endpoint.
     :type resource_path: str
@@ -264,6 +265,48 @@ def requests_delete(resource_path):
 
     response = requests.delete(
         url, auth=(boomi_cicd.USERNAME, boomi_cicd.PASSWORD), headers=headers
+    )
+    logger.info("Response: {}".format(response.text))
+    response.raise_for_status()
+    return response
+
+
+# This function will be used going forward.
+@retry(
+    stop_max_attempt_number=3,
+    wait_fixed=boomi_cicd.RATE_LIMIT_MILLISECONDS,
+    retry_on_result=lambda x: x == 503,
+)
+def atomsphere_request(
+    *, method, resource_path, payload=None, accept_header="application/json"
+):
+    """
+    Perform a request to the Atomsphere API.
+
+    :param method: The HTTP method for the request. \
+    Accepted values: get, post, put, delete.
+    :type method: str
+    :param resource_path: The resource path for the API endpoint.
+    :type resource_path: str
+    :param payload: The payload to be sent in the request body.
+    :type payload: dict or str, optional
+    :return: The response object containing the response data.
+    :param accept_header: The HTTP Accept Header for the request.
+    :type accept_header: str, defaults to "application/json"
+    :rtype: requests.Response
+    :raises requests.HTTPError: If the request fails (non-2xx response). A 503 response will be retried up to 3 times.
+    """
+    check_limit()
+    logger.info(resource_path)
+    logger.info("Request: {}".format(payload))
+    headers = {"Accept": accept_header, "Content-Type": accept_header}
+    url = boomi_cicd.BASE_URL + "/" + boomi_cicd.ACCOUNT_ID + resource_path
+
+    response = getattr(requests, method.lower())(
+        url,
+        auth=(boomi_cicd.USERNAME, boomi_cicd.PASSWORD),
+        data=payload if isinstance(payload, str) else json.dumps(payload),
+        headers=headers,
     )
     logger.info("Response: {}".format(response.text))
     response.raise_for_status()

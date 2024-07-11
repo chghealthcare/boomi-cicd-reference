@@ -23,7 +23,13 @@ for release in releases["pipelines"]:
     if "schedule" in release:
         # Get conceptual id of deployed process
         conceptual_id = boomi_cicd.query_process_schedule_status(atom_id, component_id)
-        conceptual_id_dr = boomi_cicd.query_process_schedule_status(atom_dr_id, component_id)
+        conceptual_id_dr = boomi_cicd.query_process_schedule_status(
+            atom_dr_id, component_id
+        )
 
-        boomi_cicd.update_process_schedule_status(component_id, conceptual_id, atom_id, False)
-        boomi_cicd.update_process_schedule_status(component_id, conceptual_id_dr, atom_dr_id, True)
+        boomi_cicd.update_process_schedule_status(
+            component_id, conceptual_id, atom_id, False
+        )
+        boomi_cicd.update_process_schedule_status(
+            component_id, conceptual_id_dr, atom_dr_id, True
+        )

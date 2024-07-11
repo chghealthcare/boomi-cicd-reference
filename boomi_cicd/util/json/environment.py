@@ -1,11 +1,7 @@
 def query():
     data = {
-            "QueryFilter": {
-                "expression": {
-                    "argument": [""],
-                    "operator": "EQUALS",
-                    "property": "name"
-                }
-            }
+        "QueryFilter": {
+            "expression": {"argument": [""], "operator": "EQUALS", "property": "name"}
         }
+    }
     return data
