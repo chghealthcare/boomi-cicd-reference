@@ -11,10 +11,6 @@ from boomi_cicd import logging
 
 # https://help.boomi.com/docs/Atomsphere/Integration/AtomSphere%20API/int-Connection_licensing_operation_a1412b83-b14d-4023-b274-b3212902f578
 
-"""
-This module provides functions to interact with the Boomi AtomSphere API to retrieve Connection Licensing reports.
-"""
-
 
 def create_connector_licensing_report(
     environment_id, request_interval_sec=5, max_wait_sec=300
