@@ -44,7 +44,9 @@ class TestExecutionRecord(unittest.TestCase):
         mock_get.return_value.status_code = 202
 
         with pytest.raises(TimeoutError) as pytest_wrapper_e:
-            boomi_cicd.get_execution_status(request_id, request_internal_sec=1, max_wait_sec=1)
+            boomi_cicd.get_execution_status(
+                request_id, request_internal_sec=1, max_wait_sec=1
+            )
         assert pytest_wrapper_e.type == TimeoutError
 
     @patch("boomi_cicd.util.execution_record.get_execution_status")
@@ -53,9 +55,11 @@ class TestExecutionRecord(unittest.TestCase):
         mock_get.return_value = {
             "executionId": "execution-01234567-89ab-cdef-0123-456789abcdef-2013.05.21",
             "account": "account-123456",
-            "status": "COMPLETE"
+            "status": "COMPLETE",
         }
-        result = boomi_cicd.get_completed_execution_status(request_id, request_interval_sec=1)
+        result = boomi_cicd.get_completed_execution_status(
+            request_id, request_interval_sec=1
+        )
         assert result == mock_get.return_value
 
     @patch("boomi_cicd.util.execution_record.get_execution_status")
@@ -64,10 +68,11 @@ class TestExecutionRecord(unittest.TestCase):
         mock_get.return_value = {
             "executionId": "execution-01234567-89ab-cdef-0123-456789abcdef-2013.05.21",
             "account": "account-123456",
-            "status": "INPROCESS"
+            "status": "INPROCESS",
         }
         with pytest.raises(TimeoutError) as pytest_wrapper_e:
-            boomi_cicd.get_completed_execution_status(request_id, request_interval_sec=1, max_wait_sec=6)
+            boomi_cicd.get_completed_execution_status(
+                request_id, request_interval_sec=1, max_wait_sec=6
+            )
         assert pytest_wrapper_e.type == TimeoutError
         assert mock_get.call_count == 6
-

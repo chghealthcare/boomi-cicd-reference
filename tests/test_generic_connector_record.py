@@ -12,7 +12,9 @@ class TestGenericConnectorRecord(unittest.TestCase):
         mock_post.return_value.text = json.dumps({"id": generic_connector_record_id})
         boomi_cicd.get_generic_connector_record(generic_connector_record_id)
         mock_post.assert_called_with(
-            method="get", resource_path=f"/GenericConnectorRecord/{generic_connector_record_id}")
+            method="get",
+            resource_path=f"/GenericConnectorRecord/{generic_connector_record_id}",
+        )
 
     @patch("boomi_cicd.atomsphere_request")
     def test_get_generic_connector_record_invalid_json(self, mock_post):
@@ -24,7 +26,8 @@ class TestGenericConnectorRecord(unittest.TestCase):
             boomi_cicd.get_generic_connector_record(generic_connector_record_id)
 
         mock_post.assert_called_with(
-            method="get", resource_path=f"/GenericConnectorRecord/{generic_connector_record_id}"
+            method="get",
+            resource_path=f"/GenericConnectorRecord/{generic_connector_record_id}",
         )
 
     @patch("boomi_cicd.atomsphere_request")
@@ -37,9 +40,17 @@ class TestGenericConnectorRecord(unittest.TestCase):
                 "expression": {
                     "operator": "and",
                     "nestedExpression": [
-                        {"argument": [execution_id], "operator": "EQUALS", "property": "executionId"},
-                        {"argument": [execution_connector_id], "operator": "EQUALS", "property": "executionConnectorId"}
-                    ]
+                        {
+                            "argument": [execution_id],
+                            "operator": "EQUALS",
+                            "property": "executionId",
+                        },
+                        {
+                            "argument": [execution_connector_id],
+                            "operator": "EQUALS",
+                            "property": "executionConnectorId",
+                        },
+                    ],
                 }
             }
         }
@@ -58,7 +69,9 @@ class TestGenericConnectorRecord(unittest.TestCase):
         boomi_cicd.query_generic_connector_record(execution_id, execution_connector_id)
 
         mock_post.assert_called_with(
-            method="post", resource_path='/GenericConnectorRecord/query', payload=payload
+            method="post",
+            resource_path="/GenericConnectorRecord/query",
+            payload=payload,
         )
         self.assertEqual(mock_post.call_count, 2)
 
@@ -71,21 +84,30 @@ class TestGenericConnectorRecord(unittest.TestCase):
                 "expression": {
                     "operator": "and",
                     "nestedExpression": [
-                        {"argument": [execution_id], "operator": "EQUALS", "property": "executionId"},
-                        {"argument": [execution_connector_id], "operator": "EQUALS", "property": "executionConnectorId"}
-                    ]
+                        {
+                            "argument": [execution_id],
+                            "operator": "EQUALS",
+                            "property": "executionId",
+                        },
+                        {
+                            "argument": [execution_connector_id],
+                            "operator": "EQUALS",
+                            "property": "executionConnectorId",
+                        },
+                    ],
                 }
             }
         }
 
         mock_post.return_value.text = json.dumps({"numberOfResults": 0})
 
-        boomi_cicd.query_generic_connector_record(execution_id, execution_connector_id, request_interval_sec=1,
-                                                  max_wait_sec=5)
+        boomi_cicd.query_generic_connector_record(
+            execution_id, execution_connector_id, request_interval_sec=1, max_wait_sec=5
+        )
 
         mock_post.assert_called_with(
-            method="post", resource_path='/GenericConnectorRecord/query', payload=payload
+            method="post",
+            resource_path="/GenericConnectorRecord/query",
+            payload=payload,
         )
         self.assertEqual(mock_post.call_count, 5)
-
-

@@ -278,7 +278,12 @@ def requests_delete(resource_path):
     retry_on_result=lambda x: x == 503,
 )
 def atomsphere_request(
-    *, method, resource_path, payload=None, accept_header="application/json"
+    *,
+    method,
+    resource_path,
+    payload=None,
+    accept_header="application/json",
+    pass_error=False,
 ):
     """
     Perform a request to the Atomsphere API.
@@ -293,6 +298,9 @@ def atomsphere_request(
     :return: The response object containing the response data.
     :param accept_header: The HTTP Accept Header for the request.
     :type accept_header: str, defaults to "application/json"
+    :param pass_error: Determine if an error should be passed.\
+    If False, an non-2xx response with throw an error.\
+    If True, the errow will be passed to the calling function.
     :rtype: requests.Response
     :raises requests.HTTPError: If the request fails (non-2xx response). A 503 response will be retried up to 3 times.
     """
@@ -309,5 +317,6 @@ def atomsphere_request(
         headers=headers,
     )
     logger.info("Response: {}".format(response.text))
-    response.raise_for_status()
+    if not pass_error:
+        response.raise_for_status()
     return response

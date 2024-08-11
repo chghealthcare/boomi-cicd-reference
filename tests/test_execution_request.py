@@ -24,7 +24,10 @@ class TestExecutionRequest(unittest.TestCase):
             "atomId": "fa065728-2235-4583-87ea-a9d69762f10b",
             "processId": "7b1e4d59-8d28-488b-988e-8f7826df1588",
         }
-        result = boomi_cicd.create_execution_request("fa065728-2235-4583-87ea-a9d69762f10b", "7b1e4d59-8d28-488b-988e-8f7826df1588")
+        result = boomi_cicd.create_execution_request(
+            "fa065728-2235-4583-87ea-a9d69762f10b",
+            "7b1e4d59-8d28-488b-988e-8f7826df1588",
+        )
         mock_post.assert_called_with("/ExecutionRequest", expected_payload)
         assert result == "executionrecord-43ecd865-9b5e-4e15-ae1b-f8465dafc707"
 
@@ -39,6 +42,8 @@ class TestExecutionRequest(unittest.TestCase):
         )
 
         with pytest.raises(ValueError) as pytest_wrapper_e:
-            boomi_cicd.create_execution_request("fa065728-2235-4583-87ea-a9d69762f10b",
-                                                "7b1e4d59-8d28-488b-988e-8f7826df1588")
+            boomi_cicd.create_execution_request(
+                "fa065728-2235-4583-87ea-a9d69762f10b",
+                "7b1e4d59-8d28-488b-988e-8f7826df1588",
+            )
         assert pytest_wrapper_e.type == ValueError

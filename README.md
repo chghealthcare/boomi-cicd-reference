@@ -128,5 +128,11 @@ cd docs
 sphinx-build -b html . _build 
 ```
 
+[Black](https://black.readthedocs.io/en/stable/index.html) is used for code formatting. To format the code, run the following command:
+
+```bash
+pip install black
+black .
+```
 
 

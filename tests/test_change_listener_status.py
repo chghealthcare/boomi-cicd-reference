@@ -39,4 +39,3 @@ class TestChangeListenerStatus(unittest.TestCase):
 
     #  TODO: Test the other actions
     # def test_change_listener_status_503(self, mock_post):
-

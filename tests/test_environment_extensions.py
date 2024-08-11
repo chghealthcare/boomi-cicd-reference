@@ -111,7 +111,9 @@ class TestEnvironmentExtensions(unittest.TestCase):
             "environmentId": "04490020-7c27-4972-b58f-917dd5e241bd",
         }
 
-        boomi_cicd.update_environment_extensions(mock_env["environmentId"], mock_payload)
+        boomi_cicd.update_environment_extensions(
+            mock_env["environmentId"], mock_payload
+        )
         mock_post.assert_called_with(
             f"/EnvironmentExtensions/{mock_env['environmentId']}/update", mock_payload
         )

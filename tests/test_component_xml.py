@@ -8,7 +8,9 @@ import boomi_cicd
 # TODO: Mock clone_repository()
 
 
-@patch('boomi_cicd.platform.system', return_value='Linux')  # Mock the 'platform' function for Windows
+@patch(
+    "boomi_cicd.platform.system", return_value="Linux"
+)  # Mock the 'platform' function for Windows
 def test_install_sonarqube_linux(mock_platform):
     sonarqube_zip_file = "sonar-scanner-cli-4.8.0.2856-linux.zip"
     sonarqube_dir = boomi_cicd.install_sonarqube()
@@ -21,7 +23,9 @@ def test_install_sonarqube_linux(mock_platform):
     os.remove(sonarqube_zip_file)
 
 
-@patch('boomi_cicd.platform.system', return_value='Windows')  # Mock the 'platform' function for Windows
+@patch(
+    "boomi_cicd.platform.system", return_value="Windows"
+)  # Mock the 'platform' function for Windows
 def test_install_sonarqube_windows(mock_platform):
     sonarqube_zip_file = "sonar-scanner-cli-4.8.0.2856-windows.zip"
     sonarqube_dir = boomi_cicd.install_sonarqube()

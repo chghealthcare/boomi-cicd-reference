@@ -8,9 +8,25 @@ class TestExecutionConnector(unittest.TestCase):
     @patch("boomi_cicd.atomsphere_request")
     def test_query_execution_connector(self, mock_post):
         execution_record_id = "executionrecord-43ecd865-9b5e-4e15-ae1b-f8465dafc707"
-        payload = {'QueryFilter': {'expression': {'operator': 'and', 'nestedExpression': [
-            {'argument': [execution_record_id], 'operator': 'EQUALS',
-             'property': 'executionId'}, {'argument': ['return'], 'operator': 'EQUALS', 'property': 'connectorType'}]}}}
+        payload = {
+            "QueryFilter": {
+                "expression": {
+                    "operator": "and",
+                    "nestedExpression": [
+                        {
+                            "argument": [execution_record_id],
+                            "operator": "EQUALS",
+                            "property": "executionId",
+                        },
+                        {
+                            "argument": ["return"],
+                            "operator": "EQUALS",
+                            "property": "connectorType",
+                        },
+                    ],
+                }
+            }
+        }
         mock_post.return_value.text = '{"numberOfResults": 1}'
 
         boomi_cicd.query_execution_connector(execution_record_id)
@@ -22,9 +38,25 @@ class TestExecutionConnector(unittest.TestCase):
     @patch("time.sleep", return_value=None)
     def test_query_execution_connector_twice(self, mock_sleep, mock_post):
         execution_record_id = "executionrecord-43ecd865-9b5e-4e15-ae1b-f8465dafc707"
-        payload = {'QueryFilter': {'expression': {'operator': 'and', 'nestedExpression': [
-            {'argument': [execution_record_id], 'operator': 'EQUALS',
-             'property': 'executionId'}, {'argument': ['return'], 'operator': 'EQUALS', 'property': 'connectorType'}]}}}
+        payload = {
+            "QueryFilter": {
+                "expression": {
+                    "operator": "and",
+                    "nestedExpression": [
+                        {
+                            "argument": [execution_record_id],
+                            "operator": "EQUALS",
+                            "property": "executionId",
+                        },
+                        {
+                            "argument": ["return"],
+                            "operator": "EQUALS",
+                            "property": "connectorType",
+                        },
+                    ],
+                }
+            }
+        }
 
         # Define the mock response objects
         response_1 = MagicMock()
