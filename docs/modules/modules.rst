@@ -10,6 +10,7 @@ Modules
    component
    component-xml
    connector-document
+   connector-licensing
    constants
    deployed-package
    environment
