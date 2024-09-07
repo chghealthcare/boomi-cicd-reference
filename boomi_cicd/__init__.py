@@ -5,6 +5,7 @@ from .util.atom import *
 from .util.change_listener_status import *
 from .util.common_util import *
 from .util.component import *
+from .util.component_metadata import *
 from .util.component_xml import *
 from .util.connector_document import *
 from .util.connector_licensing import *

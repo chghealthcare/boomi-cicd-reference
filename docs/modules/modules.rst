@@ -8,6 +8,7 @@ Modules
    change-listener-status
    common-util
    component
+   component-metadata
    component-xml
    connector-document
    connector-licensing
