@@ -1,0 +1,18 @@
+
+{
+   "@type" : "EnvironmentExtensions",
+   "properties" : {
+      "@type" : "",
+      "property" : [
+         {
+            "@type" : "",
+            "name" : "DeploymentMethod",
+            "value" : "GitHub Actions"
+         }
+      ]
+   },
+   "environmentId" : "a392b22e-d91a-4b2d-be0f-4bfe51bb7bd7",
+   "extensionGroupId" : "",
+   "id" : "a392b22e-d91a-4b2d-be0f-4bfe51bb7bd7",
+   "partial" : true
+}
