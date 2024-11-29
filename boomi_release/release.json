@@ -1,0 +1,12 @@
+{
+  "pipelines": [
+    {
+      "processName": "NetSuite-P-CompanyData-API-v1",
+      "packageVersion": "11-28-2024-v2",
+      "componentId": "f42e6899-a48f-447b-a181-f28332ca0a08",
+      "notes": "Github note proccess with test case",
+      "listenerStatus": "RUNNING",
+      "automatedTestId": "7569d33c-5d42-4246-9ac0-51c643ee76b6"
+    }
+  ]
+}
