@@ -23,6 +23,7 @@ jobs:
       BOOMI_ENV_RELEASE_FILE: "${{ vars.BOOMI_ENV_RELEASE_FILE }}"
       BOOMI_COMPONENT_GIT_URL: ${{ secrets.BOOMI_COMPONENT_GIT_URL }}
       BOOMI_COMPONENT_REPO_NAME: "${{ vars.BOOMI_COMPONENT_REPO_NAME }}"
+      BOOMI_SONAR_RULES_FILE: "boomi_cicd/templates/sonarqube/BoomiSonarRules.xml"
       
     steps:
       - name: 'Cleanup directory'
@@ -75,6 +76,13 @@ jobs:
           export PYTHONPATH=$(pwd)
           export BOOMI_RELEASE_FILE=${GITHUB_WORKSPACE}/${BOOMI_RELEASE_FILE}
           python3.11 boomi_cicd/scripts/component_xml_git.py
+
+      - name: Code Validation
+        run: | 
+          cd ${GITHUB_WORKSPACE}/boomi-cicd-reference
+          export PYTHONPATH=$(pwd)
+          export BOOMI_RELEASE_FILE=${GITHUB_WORKSPACE}/${BOOMI_RELEASE_FILE}
+          python3.11 boomi_cicd/scripts/component_xml_code_quality.py
           
   production:
     name: Production Deployment
