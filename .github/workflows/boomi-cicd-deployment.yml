@@ -67,6 +67,13 @@ jobs:
           export BOOMI_ENV_RELEASE_FILE=${GITHUB_WORKSPACE}/${BOOMI_ENV_RELEASE_FILE}
           python3.11 boomi_cicd/scripts/environment_extensions_update.py
           
+      - name: Store Components XML
+        run: | 
+          cd ${GITHUB_WORKSPACE}/boomi-cicd-reference
+          export PYTHONPATH=$(pwd)
+          export BOOMI_RELEASE_FILE=${GITHUB_WORKSPACE}/${BOOMI_RELEASE_FILE}
+          python3.11 boomi_cicd/scripts/component_xml_git.py
+          
   production:
     name: Production Deployment
     runs-on: ubuntu-latest
