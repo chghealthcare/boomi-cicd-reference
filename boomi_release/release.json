@@ -1,13 +1,13 @@
 {
   "pipelines": [
     {
-      "processName": "NetSuite-P-CompanyData-API-v1",
-      "packageVersion": "12-11-2024-v2",
-      "componentId": "f42e6899-a48f-447b-a181-f28332ca0a08",
-      "notes": "Github note proccess with test case",
+      "processName": "Testing the CICD Deployment",
+      "packageVersion": "1.0",
+      "componentId": "01ad4122-3d42-44e6-9ee4-4b5c8af8b02d",
+      "notes": "this deployment from github",
       "listenerStatus": "RUNNING",
-      "automatedTestId": "7569d33c-5d42-4246-9ac0-51c643ee76b6",
-      "folderFullPath": "CHG Healthcare/Sandboxes/MirchevskiDarko/CICD"
+      "automatedTestId": "0f62d64e-6d8c-4f5a-b014-f04f1f29b30a",
+      "folderFullPath": "CHG Healthcare/Sandboxes/ImpraimFred/CICDdeployment"
     }
   ]
 }
