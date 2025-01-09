@@ -2,7 +2,7 @@
   "pipelines": [
     {
       "processName": "[MAIN] [Boomi] Do nothing v1 ",
-      "packageVersion": "12-19-2024-v2",
+      "packageVersion": "12-19-2024-v2", 
       "componentId": "01ad4122-3d42-44e6-9ee4-4b5c8af8b02d",
       "notes": "this deployment from github",
       "listenerStatus": "RUNNING",
