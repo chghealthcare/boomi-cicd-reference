@@ -1,13 +1,13 @@
 {
   "pipelines": [
     {
-      "processName": "[MAIN] [Boomi] Do nothing v1 ",
-      "packageVersion": "01-15-2025v5",
-      "componentId": "01ad4122-3d42-44e6-9ee4-4b5c8af8b02d",
-      "notes": "this deployment from github",
+      "processName": "[Listener]-Leads-Legacy-Lead-to-LDM-Listener-v1",
+      "packageVersion": "37.0",
+      "componentId": "24916a80-9b27-4d1e-bae2-fa3379dc7926",
+      "notes": "added logging to send messages to our log kafka topic",
       "listenerStatus": "RUNNING",
       "automatedTestId": "0f62d64e-6d8c-4f5a-b014-f04f1f29b30a",
-      "folderFullPath": "CHG Healthcare/​Sandboxes/​ImpraimFred/​CICDdeployment"
+      "folderFullPath": "CHG Healthcare/Products/Leads/Legacy Lead to LDM Lead v1"
     }
   ]
 }
