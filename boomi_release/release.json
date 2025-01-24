@@ -2,8 +2,8 @@
   "pipelines": [
     {
       "processName": "[Listener]-Leads-Legacy-Lead-to-LDM-Listener-v1",
-      "packageVersion": "01-23-2024-R85v3",
-      "componentId": "24916a80-9b27-4d1e-bae2-fa3379dc7926",
+      "packageVersion": "01-23-2024-R85v4",
+      "componentId": "fde24ce2-9444-418e-8c2e-af851126bc6d",
       "notes": "added logging to send messages to our log kafka topic",
       "listenerStatus": "RUNNING",
       "automatedTestId": "8f6ea18a-126b-43d6-880d-ecded9a282d9",
