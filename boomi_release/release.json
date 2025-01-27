@@ -2,7 +2,7 @@
   "pipelines": [
     {
       "processName": "NetSuite-P-CompanyData-API-v1",
-      "packageVersion": "01-27-2024-R8", 
+      "packageVersion": "01-27-2024-R8",
       "componentId": "f42e6899-a48f-447b-a181-f28332ca0a08",
       "notes": "added logging to send messages to our log kafka topic",
       "listenerStatus": "RUNNING",
