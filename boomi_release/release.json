@@ -1,13 +1,13 @@
 {
   "pipelines": [
     {
-      "processName": "NetSuite-P-CompanyData-API-v1",
-      "packageVersion": "01-27-2024-R8",
-      "componentId": "f42e6899-a48f-447b-a181-f28332ca0a08",
+      "processName": "[Listener]-Leads-Legacy-Lead-to-LDM-Listener-v1",
+      "packageVersion": "01-27-2024-R92",
+      "componentId": "24916a80-9b27-4d1e-bae2-fa3379dc7926",
       "notes": "added logging to send messages to our log kafka topic",
       "listenerStatus": "RUNNING",
-      "automatedTestId": "7569d33c-5d42-4246-9ac0-51c643ee76b6",
-      "folderFullPath": "CHG Healthcare/Sandboxes/MirchevskiDarko/CICD"
+      "automatedTestId": "8f6ea18a-126b-43d6-880d-ecded9a282d9",
+      "folderFullPath": "CHG Healthcare/Products/Leads/ Legacy Lead to LDM Lead v1"
     }
   ]
 }
