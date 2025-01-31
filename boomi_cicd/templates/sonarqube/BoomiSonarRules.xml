@@ -291,7 +291,7 @@
                 </parameter>
                 <parameter>
                     <key>expression</key>
-                    <value>/bns:Component[@type='connector-settings' and not(matches(@name, '^\[.+\].*'))]</value>
+                    <value>/bns:Component[@type='connector-action' and @subType='http' and not(contains(@name, '[') and contains(@name, ']') and translate(substring-before(substring-after(@name, '['), ']'), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') = substring-before(substring-after(@name, '['), ']'))]</value>
                 </parameter>
                 <parameter>
                     <key>message</key>
