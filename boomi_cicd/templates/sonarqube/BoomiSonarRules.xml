@@ -282,7 +282,7 @@
             <priority>MINOR</priority>
             <name>XML Profile Name Must Follow Standard</name>
             <templateKey>XPathCheck</templateKey>
-            <description>XML Profile names must include square brackets ([]) with uppercase text inside (e.g., [SAP], [FOX], [LEADS]). This rule ensures compliance with naming conventions.</description>
+            <description>XML Profile names must start with a tool name inside square brackets (e.g., [SAP], [FOX], [LEADS]). This rule ensures compliance with naming conventions.</description>
             <parameters>
                 <parameter>
                     <key>filePattern</key>
@@ -290,11 +290,11 @@
                 </parameter>
                 <parameter>
                     <key>expression</key>
-                    <value>/bns:Component[@type='profile.xml' and not(contains(@name, '[') and contains(@name, ']') and translate(substring-before(substring-after(@name, '['), ']'), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') = substring-before(substring-after(@name, '['), ']'))]</value>
+                    <value>/bns:Component[@type='profile.xml' and not(starts-with(@name, '[') and contains(@name, ']'))]</value>
                 </parameter>
                 <parameter>
                     <key>message</key>
-                    <value>XML Profile names must include uppercase text in square brackets (e.g., [SAP], [FOX], [LEADS]).</value>
+                    <value>XML Profile names must start with a tool name inside square brackets (e.g., [SAP], [FOX], [LEADS]).</value>
                 </parameter>
             </parameters>
         </rule>
