@@ -276,5 +276,28 @@
                 </parameter>
             </parameters>
         </rule>
+        <rule>
+            <repositoryKey>xml</repositoryKey>
+            <key>ConnectionNameStandard</key>
+            <type>CODE_SMELL</type>
+            <priority>MINOR</priority>
+            <name>Connection Name Must Follow CHG Standard</name>
+            <templateKey>XPathCheck</templateKey>
+            <description>The name of HTTP connection components must include square brackets ([]) with uppercase text inside (e.g., [Salesforce], [NetSuite], [SAP]). This rule ensures compliance with CHG naming conventions.</description>
+            <parameters>
+                <parameter>
+                    <key>filePattern</key>
+                    <value>**/**.xml</value>
+                </parameter>
+                <parameter>
+                    <key>expression</key>
+                    <value>/bns:Component[@type='connector-settings' and not(matches(@name, '^\[.+\].*'))]</value>
+                </parameter>
+                <parameter>
+                    <key>message</key>
+                    <value>HTTP Connection names must include text in square brackets (e.g., [Salesforce], [HRIS], [SAP]).</value>
+                </parameter>
+            </parameters>
+        </rule>
     </rules>
 </profile>
