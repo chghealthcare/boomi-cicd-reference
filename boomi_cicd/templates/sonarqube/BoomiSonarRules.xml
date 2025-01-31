@@ -336,7 +336,7 @@
                 </parameter>
                 <parameter>
                     <key>expression</key>
-                    <value>/bns:Component[@type='profile.xml' and not(starts-with(@name, '[') and contains(@name, ']'))]</value>
+                    <value>/bns:Component[@type='profile.db' and not(starts-with(@name, '[') and contains(@name, ']'))]</value>
                 </parameter>
                 <parameter>
                     <key>message</key>
@@ -359,7 +359,7 @@
                 </parameter>
                 <parameter>
                     <key>expression</key>
-                    <value>/bns:Component[@type='profile.xml' and not(starts-with(@name, '[') and contains(@name, ']'))]</value>
+                    <value>/bns:Component[@type='profile.edi' and not(starts-with(@name, '[') and contains(@name, ']'))]</value>
                 </parameter>
                 <parameter>
                     <key>message</key>
@@ -382,7 +382,7 @@
                 </parameter>
                 <parameter>
                     <key>expression</key>
-                    <value>/bns:Component[@type='profile.xml' and not(starts-with(@name, '[') and contains(@name, ']'))]</value>
+                    <value>/bns:Component[@type='profile.flatfile' and not(starts-with(@name, '[') and contains(@name, ']'))]</value>
                 </parameter>
                 <parameter>
                     <key>message</key>
@@ -405,7 +405,7 @@
                 </parameter>
                 <parameter>
                     <key>expression</key>
-                    <value>/bns:Component[@type='profile.xml' and not(starts-with(@name, '[') and contains(@name, ']'))]</value>
+                    <value>/bns:Component[@type='profile.json' and not(starts-with(@name, '[') and contains(@name, ']'))]</value>
                 </parameter>
                 <parameter>
                     <key>message</key>
