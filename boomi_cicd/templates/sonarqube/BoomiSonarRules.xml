@@ -106,8 +106,7 @@
             <priority>MAJOR</priority>
             <name>Password must be extensible</name>
             <templateKey>XPathCheck</templateKey>
-            <description>Is the password hard coded? The connection property password must be marked as extensible.
-            </description>
+            <description>Is the password hard coded? The connection property password must be marked as extensible.</description>
             <parameters>
                 <parameter>
                     <key>filePattern</key>
