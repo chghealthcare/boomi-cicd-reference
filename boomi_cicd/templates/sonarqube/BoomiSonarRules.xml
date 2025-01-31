@@ -10,8 +10,7 @@
             <priority>MINOR</priority>
             <name>Components Shall Not Start With New</name>
             <templateKey>XPathCheck</templateKey>
-            <description>Component names must not start with "New " which is Boomi"s default. They should be named to have a accurate description.
-            </description>
+            <description>Component names must not start with "New " which is Boomi"s default. They should be named to have a accurate description.</description>
             <parameters>
                 <parameter>
                     <key>filePattern</key>
@@ -157,8 +156,7 @@
             <priority>MAJOR</priority>
             <name>User name must be extensible</name>
             <templateKey>XPathCheck</templateKey>
-            <description>Is user name hard coded? Connection setting username must be marked as extensible.
-            </description>
+            <description>Is user name hard coded? Connection setting username must be marked as extensible.</description>
             <parameters>
                 <parameter>
                     <key>filePattern</key>
@@ -282,7 +280,7 @@
             <priority>MINOR</priority>
             <name>HTTP Connection Name Must Follow CHG Standard</name>
             <templateKey>XPathCheck</templateKey>
-            <description>The name of HTTP connection components must include square brackets ([]) with uppercase text inside (e.g., [SF], [HRIS], [SAP]). This rule ensures compliance with CHG naming conventions.</description>
+            <description>The name of HTTP connection components must include square brackets ([]) with uppercase text inside (e.g., [Salesforce], [Leads], [SAP]). This rule ensures compliance with CHG naming conventions.</description>
             <parameters>
                 <parameter>
                     <key>filePattern</key>
@@ -294,7 +292,7 @@
                 </parameter>
                 <parameter>
                     <key>message</key>
-                    <value>HTTP Connection names must include uppercase text in square brackets (e.g., [SF], [HRIS], [SAP]).</value>
+                    <value>HTTP Connection names must include uppercase text in square brackets (e.g., [Salesforce], [Leads], [SAP]).</value>
                 </parameter>
             </parameters>
         </rule>
@@ -305,7 +303,7 @@
             <priority>MINOR</priority>
             <name>HTTP Connection Operation Name Must Follow CHG Standard</name>
             <templateKey>XPathCheck</templateKey>
-            <description>The name of HTTP connection operation must include square brackets ([]) with uppercase text inside (e.g., [SF], [HRIS], [SAP]). This rule ensures compliance with CHG naming conventions.</description>
+            <description>The name of HTTP connection operation must include square brackets ([]) with uppercase text inside (e.g., [Salesforce], [Leads], [SAP]). This rule ensures compliance with CHG naming conventions.</description>
             <parameters>
                 <parameter>
                     <key>filePattern</key>
