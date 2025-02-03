@@ -5,10 +5,10 @@
     <rules>
         <rule>
             <repositoryKey>xml</repositoryKey>
-            <key>Components_Shall_Not_Start_With_New</key>
+            <key>Components_Should_Not_Start_With_New</key>
             <type>CODE_SMELL</type>
-            <priority>MINOR</priority>
-            <name>Components Shall Not Start With New</name>
+            <priority>MAJOR</priority>
+            <name>Components Should Not Start With New</name>
             <templateKey>XPathCheck</templateKey>
             <description>Component names must not start with "New " which is Boomi"s default. They should be named to have a accurate description.</description>
             <parameters>
@@ -22,7 +22,7 @@
                 </parameter>
                 <parameter>
                     <key>message</key>
-                    <value>Component names shall not begin with *New *. Please rename to match naming standard.</value>
+                    <value>Component names should not begin with *New *. Please rename to match CHG naming standard.</value>
                 </parameter>
             </parameters>
         </rule>
@@ -31,9 +31,9 @@
             <key>Description_Must_Not_Be_Empty</key>
             <type>CODE_SMELL</type>
             <priority>MINOR</priority>
-            <name>Description Must Not Be Empty</name>
+            <name>Description Should Not Be Empty</name>
             <templateKey>XPathCheck</templateKey>
-            <description>Process description must be set</description>
+            <description>Process description should be set</description>
             <parameters>
                 <parameter>
                     <key>filePattern</key>
@@ -176,31 +176,6 @@
         </rule>
         <rule>
             <repositoryKey>xml</repositoryKey>
-            <key>AtomQueue_Has_NoMinConnections</key>
-            <type>BUG</type>
-            <priority>MAJOR</priority>
-            <name>AtomQ Listener Connections</name>
-            <templateKey>XPathCheck</templateKey>
-            <description>AtomQ Listener must not have max connections set to O</description>
-            <parameters>
-                <parameter>
-                    <key>filePattern</key>
-                    <value>**/**.xml</value>
-                </parameter>
-                <parameter>
-                    <key>expression</key>
-                    <value>
-                        /bns:Component/bns:object/Operation/Configuration/QueueGetAction[@maxConcurrentExecutions='0']
-                    </value>
-                </parameter>
-                <parameter>
-                    <key>message</key>
-                    <value>AtomQ Listener shall not have 0 as max connections</value>
-                </parameter>
-            </parameters>
-        </rule>
-        <rule>
-            <repositoryKey>xml</repositoryKey>
             <key>AtomQueue_Has_NoDLQ</key>
             <type>BUG</type>
             <priority>MINOR</priority>
@@ -220,31 +195,6 @@
                 <parameter>
                     <key>message</key>
                     <value>AtomQ Listener should have a Dead Letter Queue</value>
-                </parameter>
-            </parameters>
-        </rule>
-        <rule>
-            <repositoryKey>xml</repositoryKey>
-            <key>JMS_Has_NoMinConnections</key>
-            <type>BUG</type>
-            <priority>MAJOR</priority>
-            <name>JMS Listener Connections</name>
-            <templateKey>XPathCheck</templateKey>
-            <description>JMS Listener must not have max connections set to O</description>
-            <parameters>
-                <parameter>
-                    <key>filePattern</key>
-                    <value>**/**.xml</value>
-                </parameter>
-                <parameter>
-                    <key>expression</key>
-                    <value>
-                        /bns:Component/bns:object/Operation/Configuration/JMSGetAction[@maxConcurrentExecutions='0']
-                    </value>
-                </parameter>
-                <parameter>
-                    <key>message</key>
-                    <value>JMS Listener shall not have 0 as max connections</value>
                 </parameter>
             </parameters>
         </rule>
