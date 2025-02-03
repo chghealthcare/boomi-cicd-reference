@@ -200,7 +200,7 @@
         </rule>
         <rule>
             <repositoryKey>xml</repositoryKey>
-            <key>GeneralModeListener</key>
+            <key>General_Mode_Listener</key>
             <type>BUG</type>
             <priority>MINOR</priority>
             <name>General Model Listener Process</name>
@@ -225,7 +225,7 @@
         </rule>
         <rule>
             <repositoryKey>xml</repositoryKey>
-            <key>ConnectionNameStandard</key>
+            <key>Connection_Name_Standard</key>
             <type>CODE_SMELL</type>
             <priority>MINOR</priority>
             <name>Connection Name Must Follow CHG Standard</name>
@@ -248,7 +248,7 @@
         </rule>
         <rule>
             <repositoryKey>xml</repositoryKey>
-            <key>ConnectionOperationNameStandard</key>
+            <key>Connection_Operation_NameStandard</key>
             <type>CODE_SMELL</type>
             <priority>MINOR</priority>
             <name>Connection Operation Name Must Follow CHG Standard</name>
@@ -265,7 +265,7 @@
                 </parameter>
                 <parameter>
                     <key>message</key>
-                    <value>Connection operations must include uppercase text in square brackets (e.g., [SF], [HRIS], [SAP]).</value>
+                    <value>Connection operations must include uppercase text in square brackets (e.g., [Salesforce], [Leads], [SAP]).</value>
                 </parameter>
             </parameters>
         </rule>
