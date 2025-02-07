@@ -1,13 +1,13 @@
 {
   "pipelines": [
     {
-      "processName": "[Listener]-Leads-Legacy-Lead-to-LDM-v1",
-      "packageVersion": "02-05-2025-R116",
-      "componentId": "24916a80-9b27-4d1e-bae2-fa3379dc7926",
-      "notes": "EIE-757: added logging to the kafka worker",
+      "processName": "[Main]-Kafka-Producer-Example-v1",
+      "packageVersion": "02-06-2025-R91",
+      "componentId": "3443d486-d698-4132-b47b-18d332caea17",
+      "notes": "EIE-726: Created a Kafka Producer example",
       "listenerStatus": "RUNNING",
-      "automatedTestId": "8f6ea18a-126b-43d6-880d-ecded9a282d9",
-      "folderFullPath": "CHG Healthcare/​Products/​Leads/​ Legacy Lead to LDM Lead v1"
+      "automatedTestId": "7b5b7501-fb0b-440d-bd35-29e1249bd41d",
+      "folderFullPath": "CHG Healthcare/Sandboxes/#EXAMPLES/​Kafka/Kafka Producer v1"
     }
   ]
 }
