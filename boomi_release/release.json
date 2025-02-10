@@ -2,7 +2,7 @@
   "pipelines": [
     {
       "processName": "NetSuite-P-CompanyData-API-v1",
-      "packageVersion": "02-10-2025-R8",
+      "packageVersion": "02-10-2025-R10",
       "componentId": "f42e6899-a48f-447b-a181-f28332ca0a08",
       "notes": "test",
       "listenerStatus": "RUNNING",
