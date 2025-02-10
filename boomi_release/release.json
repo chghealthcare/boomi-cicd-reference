@@ -1,13 +1,13 @@
 {
   "pipelines": [
     {
-      "processName": "[Main]-Kafka-Producer-Example-v1",
-      "packageVersion": "02-06-2025-R91",
-      "componentId": "3443d486-d698-4132-b47b-18d332caea17",
-      "notes": "EIE-726: Created a Kafka Producer example",
+      "processName": "NetSuite-P-CompanyData-API-v1",
+      "packageVersion": "02-10-2025-R8",
+      "componentId": "f42e6899-a48f-447b-a181-f28332ca0a08",
+      "notes": "test",
       "listenerStatus": "RUNNING",
-      "automatedTestId": "7b5b7501-fb0b-440d-bd35-29e1249bd41d",
-      "folderFullPath": "CHG Healthcare/Sandboxes/#EXAMPLES/​Kafka/Kafka Producer v1"
+      "automatedTestId": "7569d33c-5d42-4246-9ac0-51c643ee76b6",
+      "folderFullPath": "CHG Healthcare/Sandboxes/#EIE/v_darmir/CICD"
     }
   ]
 }
