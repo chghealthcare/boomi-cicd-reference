@@ -2,7 +2,7 @@
   "pipelines": [
     {
       "processName": "[Listener] Boomi Example Get API-v1",
-      "packageVersion": "02-10-2025-R21",
+      "packageVersion": "02-11-2025-R21",
       "componentId": "95b03cb2-b412-4768-af19-df1e73741e56",
       "notes": "Boomi API Example API",
       "listenerStatus": "RUNNING",
