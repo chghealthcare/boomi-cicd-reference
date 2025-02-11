@@ -1,18 +1,10 @@
 {
   "pipelines": [
     {
-      "processName": "[API] Boomi Example Get URL Param",
-      "packageVersion": "02-10-2025-R10",
-      "componentId": "a360c8ff-e024-465a-9314-b733b142ee46",
-      "notes": "API service Component",
-      "listenerStatus": "RUNNING",
-      "folderFullPath": "CHG Healthcare/Sandboxes/#EXAMPLES/Boomi API Example"
-    },
-    {
       "processName": "[Listener] Boomi Example Get API-v1",
       "packageVersion": "02-10-2025-R70",
       "componentId": "95b03cb2-b412-4768-af19-df1e73741e56",
-      "notes": "Example API",
+      "notes": "Boomi API Example API",
       "listenerStatus": "RUNNING",
       "automatedTestId": "157d95d-5efe-4522-8885-d7dcda972932",
       "folderFullPath": "CHG Healthcare/Sandboxes/#EXAMPLES/Boomi API Example"
