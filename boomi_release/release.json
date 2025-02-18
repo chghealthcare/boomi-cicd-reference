@@ -1,13 +1,13 @@
 {
   "pipelines": [
     {
-      "processName": "[Listener] Boomi Example Get API-v1",
+      "processName": "[Main]-Leads-Sync Posts-v1",
       "packageVersion": "02-11-2025-R21",
-      "componentId": "95b03cb2-b412-4768-af19-df1e73741e56",
+      "componentId": "271fe9cb-24e3-4313-96bd-2516cc7e10dc",
       "notes": "Boomi API Example API",
       "listenerStatus": "RUNNING",
-      "automatedTestId": "f157d95d-5efe-4522-8885-d7dcda972932",
-      "folderFullPath": "CHG Healthcare/Sandboxes/#EXAMPLES/Boomi API Example"
+      "automatedTestId": "50e878c6-0f8f-454c-9dd7-6f4195b5365a",
+      "folderFullPath": "CHG Healthcare/Sandboxes/#EIE/v_darmir/TestingStrategies"
     }
   ]
 }
